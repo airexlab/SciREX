@@ -23,31 +23,11 @@ theme:
 
   # Add a custom vibrant logo here
 
-# exclude_docs: |
-#   api/experimental/**
+exclude_docs: |
+  api/experimental/sciml/**
 
 nav:
   - Docs: index.md
-  - Deep Learning:
-      - NN :
-        - activation: api/nn/activation.md
-        - loss: api/nn/loss.md
-        - metrics: api/nn/metrics.md
-        - others: api/nn/others.md
-      - Layer :
-        - attention : api/nn/layer/attention.md
-        - convolution : api/nn/layer/convolution.md
-        - dropout : api/nn/layer/dropout.md
-        - embeddings : api/nn/layer/embeddings.md
-        - linear : api/nn/layer/linear.md
-        - normalisation : api/nn/layer/normalisation.md
-        - pooling : api/nn/layer/pooling.md
-        - recurrent : api/nn/layer/recurrent.md
-        - sequential : api/nn/layer/sequential.md
-        - fcnn: api/nn/layer/fcnn.md
-        - gcn: api/nn/layer/gcn.md
-        - MLP: api/nn/layer/mlp.md
-      - base: api/nn/base.md
   - Experimental:
       - Machine Learning:
           - Supervised:
