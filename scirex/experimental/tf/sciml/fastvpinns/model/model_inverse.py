@@ -26,7 +26,7 @@
 """Neural Network Model Implementation for PDE Parameter Inverse Problems.
 
 This module implements the neural network architecture and training loop for
-solving inverse problems in PDEs using variational physics-informed neural 
+solving inverse problems in PDEs using variational physics-informed neural
 networks (VPINNs). It focuses on identifying constant parameters while solving
 the underlying PDE simultaneously.
 

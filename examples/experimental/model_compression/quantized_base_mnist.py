@@ -24,13 +24,13 @@
 
 """
    Example Script: quantization_base_mnist.py
-   
+
    This script demonstrates quantization-aware training on the MNIST dataset. It gives the performance of the baseline model.
 
    This example includes:
        - Training baseline model on MNIST dataset
        - Evaluating model accuracy before QAT
-       
+
 
    Authors:
        - Nithyashree R (nithyashreer@iisc.ac.in)
@@ -41,7 +41,7 @@
 
 import numpy as np
 import tensorflow as tf
-from scirex.eperimental.core.model_compression.quantization import QuantizationAwareTraining
+from scirex.experimental.model_compression.quantization import QuantizationAwareTraining
 
 # Load MNIST dataset
 (train_images, train_labels), (test_images, test_labels) = (

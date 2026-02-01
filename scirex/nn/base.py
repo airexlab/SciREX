@@ -23,37 +23,38 @@
 # please contact: contact@scirex.org
 
 """
-    Module: base.py
+Module: base.py
 
-    This module implements the base class for Neural Networks
+This module implements the base class for Neural Networks
 
-    Key Classes:
-        Network: Base class for a Neural Network Architecture
-        Model: Base class for a Neural Network Model
+Key Classes:
+    Network: Base class for a Neural Network Architecture
+    Model: Base class for a Neural Network Model
 
-    Key Features:
-        - Built on top of Jax and Flax.NNX for efficient hardware-aware computation 
-        - Optimized training using autograd and jit compilation from jax and flax.nnx
-        - Efficient neural networks implementation using flax.nnx modules
-        - Modular and extensible design for easy customization
+Key Features:
+    - Built on top of Jax and Flax.NNX for efficient hardware-aware computation
+    - Optimized training using autograd and jit compilation from jax and flax.nnx
+    - Efficient neural networks implementation using flax.nnx modules
+    - Modular and extensible design for easy customization
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 02/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 02/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
 import time
-from tqdm import tqdm
-from typing import Callable, Any
+from typing import Any, Callable, ClassVar, Optional
 
 import jax
 import jax.numpy as jnp
-from flax import nnx
 import optax
+from flax import nnx
 from matplotlib import pyplot as plt
+from tqdm import tqdm
 
 
 class Network(nnx.Module):
@@ -102,14 +103,14 @@ class Model:
         history (list): List storing training metrics for each epoch.
     """
 
-    history = []
+    history: ClassVar[list] = []
 
     def __init__(
         self,
         net: Network,
         optimizer: optax.GradientTransformation,
         loss_fn: Callable,
-        metrics: list[Callable] = [],
+        metrics: Optional[list[Callable]] = None,
     ):
         """
         Initialize the model with network architecture and training parameters.
@@ -120,11 +121,13 @@ class Model:
             loss_fn (Callable): Loss function for training.
             metrics (list[Callable]): List of metric functions for evaluation.
         """
+        if metrics is None:
+            metrics = []
         self.net = net
         self.loss_fn = loss_fn
         self.optimizer = nnx.Optimizer(net, optimizer)
         self.metrics = metrics
-        
+
         # Create JIT-compiled versions of critical functions for efficiency
         self._jit_update_step = self._create_jit_update_step()
         self._jit_evaluate = self._create_jit_evaluate()
@@ -163,25 +166,19 @@ class Model:
         """
         self.history = []
         print("Creating batches...")
-        (x_train, y_train), (x_val, y_val) = self._create_batches(
-            features, target, batch_size
-        )
+        (x_train, y_train), (x_val, y_val) = self._create_batches(features, target, batch_size)
 
         print("Training...")
         for epoch in tqdm(range(num_epochs), desc="Epochs", total=num_epochs):
             loss, epoch_time = self._epoch_step(x_train, y_train)
             val_loss, val_metrics = self.evaluate(x_val, y_val)
-            print(
-                f"Epoch {epoch+1} | Loss: {loss:.4f} | Val Loss: {val_loss:.4f} | Time: {epoch_time:.2f}s"
-            )
-            self.history.append(
-                {
-                    "loss": loss,
-                    "val_loss": val_loss,
-                    "val_metrics": val_metrics,
-                    "epoch_time": epoch_time,
-                }
-            )
+            print(f"Epoch {epoch + 1} | Loss: {loss:.4f} | Val Loss: {val_loss:.4f} | Time: {epoch_time:.2f}s")
+            self.history.append({
+                "loss": loss,
+                "val_loss": val_loss,
+                "val_metrics": val_metrics,
+                "epoch_time": epoch_time,
+            })
 
         return self.history
 
@@ -214,7 +211,8 @@ class Model:
         # But eqx.tree_serialise_leaves was likely used for weight saving.
         # We'll need a way to serialize this state.
         import pickle
-        with open(filename, 'wb') as f:
+
+        with open(filename, "wb") as f:
             pickle.dump(state, f)
 
     def load_net(self, filename: str):
@@ -225,8 +223,9 @@ class Model:
             filename (str): File name to load the network from.
         """
         import pickle
-        with open(filename, 'rb') as f:
-            state = pickle.load(f)
+
+        with open(filename, "rb") as f:
+            state = pickle.load(f)  # noqa: S301
         nnx.update(self.net, state)
 
     def update_net(self, state: Any):
@@ -274,9 +273,7 @@ class Model:
         ax[0].grid(True)
 
         if len(self.metrics) > 0:
-            ax[1].plot(
-                epochs, [epoch_data["val_metrics"][0] for epoch_data in self.history]
-            )
+            ax[1].plot(epochs, [epoch_data["val_metrics"][0] for epoch_data in self.history])
             ax[1].set_xlabel("Epoch")
             ax[1].set_ylabel(self.metrics[0].__name__)
             ax[1].set_title("Validation Metrics")
@@ -289,37 +286,39 @@ class Model:
         """
         Create a JIT-compiled update step function for efficient training.
         Uses nnx.jit for stateful module compilation.
-        
+
         Returns:
             Callable: JIT-compiled update function
         """
+
         @nnx.jit
         def update_fn(net, optimizer, features, labels):
             def loss_fn(model):
                 predictions = model(features)
                 return self.loss_fn(predictions, labels).mean()
-            
+
             loss, grads = nnx.value_and_grad(loss_fn)(net)
             optimizer.update(grads)
             return loss
-        
+
         return update_fn
-    
+
     def _create_jit_evaluate(self):
         """
         Create a JIT-compiled evaluation function for efficient inference.
-        
+
         Returns:
             Callable: JIT-compiled evaluation function
         """
+
         @nnx.jit
         def eval_fn(net, x, y):
             output = net(x)
             loss = self.loss_fn(output, y).mean()
             return loss, output
-        
+
         return eval_fn
-    
+
     def _evaluate(self, net: Network, x: jnp.ndarray, y: jnp.ndarray):
         """
         Internal method for model evaluation.
@@ -357,28 +356,33 @@ class Model:
         """
         num_samples = len(features)
         num_complete_batches = num_samples // batch_size
-        
+
         if num_complete_batches == 0:
-            raise ValueError("Batch size must be smaller than number of samples")
-        
+            msg = "Batch size must be smaller than number of samples"
+            raise ValueError(msg)
+
         # Reserve last batch for validation if we have more than 1 batch
         num_train_batches = num_complete_batches - (0 if num_complete_batches == 1 else 1)
         num_features_batched = num_train_batches * batch_size
-        
+
         # Efficient reshaping using JAX arrays
-        batched_features = jnp.array(features[:num_features_batched]).reshape(
-            (num_train_batches, batch_size, *features.shape[1:])
-        )
-        batched_targets = jnp.array(targets[:num_features_batched]).reshape(
-            (num_train_batches, batch_size, *targets.shape[1:])
-        )
-        
+        batched_features = jnp.array(features[:num_features_batched]).reshape((
+            num_train_batches,
+            batch_size,
+            *features.shape[1:],
+        ))
+        batched_targets = jnp.array(targets[:num_features_batched]).reshape((
+            num_train_batches,
+            batch_size,
+            *targets.shape[1:],
+        ))
+
         # Validation data from remaining samples
         validation_data = (
             jnp.array(features[num_features_batched:]),
             jnp.array(targets[num_features_batched:]),
         )
-        
+
         return (batched_features, batched_targets), validation_data
 
     def _epoch_step(self, features, labels):
@@ -395,17 +399,17 @@ class Model:
                 - Time taken for the epoch
         """
         start_time = time.time()
-        
+
         # Accumulate losses efficiently
         losses = []
         for batch_x, batch_y in zip(features, labels):
             loss = self._update_step(batch_x, batch_y)
             losses.append(loss)
-        
+
         # Compute mean loss efficiently
         avg_loss = jnp.mean(jnp.array(losses))
         epoch_time = time.time() - start_time
-        
+
         return float(avg_loss), epoch_time
 
     def _update_step(self, features, labels):

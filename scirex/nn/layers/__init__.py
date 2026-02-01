@@ -23,35 +23,22 @@
 # please contact: contact@scirex.org
 
 """
-    Module: layers/__init__.py
+Module: layers/__init__.py
 
-    Exports all neural network layers.
+Exports all neural network layers.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated to Flax.NNX, added normalization subdirectory
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated to Flax.NNX, added normalization subdirectory
 
 """
 
 # Core layers
-from scirex.nn.layers.linear import Linear, LinearGeneral, Einsum
-from scirex.nn.layers.mlp import MLP
-from scirex.nn.layers.sequential import Sequential, Lambda, StatefulLayer
-from scirex.nn.layers.fcnn import FCNN
-
-# Normalization layers (from subdirectory)
-from scirex.nn.layers.normalization import (
-    BatchNorm,
-    LayerNorm,
-    RMSNorm,
-    GroupNorm,
-    InstanceNorm,
-    SpectralNorm,
-    WeightNorm,
-)
+# Attention
+from scirex.nn.layers.attention import MultiHeadAttention, RotaryPositionalEmbedding
 
 # Convolution and pooling
 from scirex.nn.layers.convolution import (
@@ -63,63 +50,70 @@ from scirex.nn.layers.convolution import (
     ConvTranspose2d,
     ConvTranspose3d,
 )
-from scirex.nn.layers.pooling import (
-    MaxPool1d,
-    MaxPool2d,
-    MaxPool3d,
-    AvgPool1d,
-    AvgPool2d,
-    AvgPool3d,
-    AdaptiveMaxPool1d,
-    AdaptiveMaxPool2d,
-    AdaptiveAvgPool1d,
-    AdaptiveAvgPool2d,
-)
 
 # Regularization
 from scirex.nn.layers.dropout import Dropout
 
+# Embeddings
+from scirex.nn.layers.embeddings import Embedding
+from scirex.nn.layers.fcnn import FCNN
+
+# Graph layers
+from scirex.nn.layers.gcn import GCN, GCNModel
+from scirex.nn.layers.linear import Einsum, Linear, LinearGeneral
+
+# LoRA (Low-Rank Adaptation)
+from scirex.nn.layers.lora import LoRA, LoRALinear, LoRAParam
+from scirex.nn.layers.mlp import MLP
+
+# Normalization layers (from subdirectory)
+from scirex.nn.layers.normalization import (
+    BatchNorm,
+    GroupNorm,
+    InstanceNorm,
+    LayerNorm,
+    RMSNorm,
+    SpectralNorm,
+    WeightNorm,
+)
+from scirex.nn.layers.pooling import (
+    AdaptiveAvgPool1d,
+    AdaptiveAvgPool2d,
+    AdaptiveMaxPool1d,
+    AdaptiveMaxPool2d,
+    AvgPool1d,
+    AvgPool2d,
+    AvgPool3d,
+    MaxPool1d,
+    MaxPool2d,
+    MaxPool3d,
+)
+
 # Recurrent layers
 from scirex.nn.layers.recurrent import (
+    RNN,
+    Bidirectional,
     GRUCell,
     LSTMCell,
     OptimizedLSTMCell,
     SimpleCell,
-    RNN,
-    Bidirectional,
 )
-
-# LoRA (Low-Rank Adaptation)
-from scirex.nn.layers.lora import LoRA, LoRALinear, LoRAParam
-
-# Embeddings
-from scirex.nn.layers.embeddings import Embedding
-
-# Attention
-from scirex.nn.layers.attention import MultiHeadAttention, RotaryPositionalEmbedding
-
-# Graph layers
-from scirex.nn.layers.gcn import GCN, GCNModel
+from scirex.nn.layers.sequential import Lambda, Sequential, StatefulLayer
 
 __all__ = [
-    # Core
-    "Linear",
-    "LinearGeneral",
-    "Einsum",
-    "MLP",
-    "Sequential",
-    "Lambda",
-    "StatefulLayer",
     "FCNN",
-    # Normalization
+    "GCN",
+    "MLP",
+    "RNN",
+    "AdaptiveAvgPool1d",
+    "AdaptiveAvgPool2d",
+    "AdaptiveMaxPool1d",
+    "AdaptiveMaxPool2d",
+    "AvgPool1d",
+    "AvgPool2d",
+    "AvgPool3d",
     "BatchNorm",
-    "LayerNorm",
-    "RMSNorm",
-    "GroupNorm",
-    "InstanceNorm",
-    "SpectralNorm",
-    "WeightNorm",
-    # Convolution
+    "Bidirectional",
     "Conv1d",
     "Conv2d",
     "Conv3d",
@@ -127,28 +121,31 @@ __all__ = [
     "ConvTranspose1d",
     "ConvTranspose2d",
     "ConvTranspose3d",
-    # Pooling
+    "Dropout",
+    "Einsum",
+    "Embedding",
+    "GCNModel",
+    "GRUCell",
+    "GroupNorm",
+    "InstanceNorm",
+    "LSTMCell",
+    "Lambda",
+    "LayerNorm",
+    "Linear",
+    "LinearGeneral",
+    "LoRA",
+    "LoRALinear",
+    "LoRAParam",
     "MaxPool1d",
     "MaxPool2d",
     "MaxPool3d",
-    "AvgPool1d",
-    "AvgPool2d",
-    "AvgPool3d",
-    "AdaptiveMaxPool1d",
-    "AdaptiveMaxPool2d",
-    "AdaptiveAvgPool1d",
-    "AdaptiveAvgPool2d",
-    # Regularization
-    "Dropout",
-    # Embeddings
-    "Embedding",
-    # Attention
     "MultiHeadAttention",
+    "OptimizedLSTMCell",
+    "RMSNorm",
     "RotaryPositionalEmbedding",
-    # Recurrent
-    "GRUCell",
-    "LSTMCell",
-    # Graph
-    "GCN",
-    "GCNModel",
+    "Sequential",
+    "SimpleCell",
+    "SpectralNorm",
+    "StatefulLayer",
+    "WeightNorm",
 ]

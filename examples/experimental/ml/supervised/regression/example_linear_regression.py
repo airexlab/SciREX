@@ -38,7 +38,7 @@
         - numpy
         - matplotlib
         - scikit-learn
-        - scirex.eperimental.core.ml.supervised.regression.linear_regression
+        - scirex.experimental.ml.supervised.regression.linear_regression
 
     Authors:
         - Paranidharan (paranidharan@iisc.ac.in)
@@ -49,7 +49,7 @@
 
 import numpy as np
 from sklearn.datasets import make_regression
-from scirex.eperimental.core.ml.supervised.regression.linear_regression import LinearRegressionModel
+from scirex.experimental.ml.supervised.regression.linear_regression import LinearRegressionModel
 
 # Step 1: Generate synthetic regression data
 X, y = make_regression(n_samples=100, n_features=1, noise=10, random_state=42)

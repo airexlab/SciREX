@@ -21,9 +21,9 @@
 ## Project Leadership
 
 ### Project Director
-**Prof. Sashikumaar Ganesan**  
-Chief AI Officer (CAiO), Zenteiq Aitech Innovations  
-Professor, Indian Institute of Science, Bangalore  
+**Prof. Sashikumaar Ganesan**
+Chief AI Officer (CAiO), Zenteiq Aitech Innovations
+Professor, Indian Institute of Science, Bangalore
 Convener, AiREX Lab
 
 ### Technical Leads (Present)
@@ -106,25 +106,25 @@ Open positions in:
 ### Individual Achievements
 
 #### Contribution Levels
-- **Platinum Contributor**: 
+- **Platinum Contributor**:
   - 50+ accepted Pull Requests
   - Major scientific feature implementations
   - Significant mathematical algorithm improvements
   - Long-term research contributions
 
-- **Gold Contributor**: 
+- **Gold Contributor**:
   - 30+ accepted Pull Requests
   - Scientific algorithm implementations
   - Major mathematical optimizations
   - Substantial documentation improvements
 
-- **Silver Contributor**: 
+- **Silver Contributor**:
   - 15+ accepted Pull Requests
   - Algorithm optimizations
   - Documentation updates
   - Testing improvements
 
-- **Bronze Contributor**: 
+- **Bronze Contributor**:
   - 5+ accepted Pull Requests
   - Initial contributions
   - Minor fixes
@@ -146,7 +146,7 @@ SciREX is licensed under the Apache License, Version 2.0. You may obtain a copy 
 
 ## Citation
 
-If you use SciREX in your research, please cite: 
+If you use SciREX in your research, please cite:
 
 ```bibtex
 @software{scirex2024,

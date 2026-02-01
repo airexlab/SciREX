@@ -41,17 +41,30 @@ dependencies = [
     "polars>=1.37.1",
     "seaborn>=0.13.2",
     "tqdm>=4.66.3",
-]
-
-[dependency-groups]
-# Core neural network dependencies (scirex.nn)
-nn = [
     "jax>=0.4.0",
     "flax>=0.10.0",
     "optax>=0.2.0",
-    "matplotlib>=3.4.0",
+    "tensorflow>=2.18.1",
+    "tensorflow-datasets>=4.9.9",
+    "scikit-learn>=1.7.2",
 ]
 
+[dependency-groups]
+# Development dependencies
+dev = [
+    "pytest>=9.0.2",
+    "pre-commit>=4.5.1",
+    "tox-uv>=1.29.0",
+    "deptry>=0.24.0",
+    "mypy>=1.19.1",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.10",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.1",
+    "mkdocstrings[python]>=1.0.0",
+]
+
+[project.optional-dependencies]
 # Experimental features (moved from core, uses numpy<2.0 for TensorFlow compatibility)
 experimental = [
     "pandas>=2.0.0",
@@ -72,22 +85,9 @@ experimental = [
     "torch_geometric>=2.3.0",
 ]
 
-# Development dependencies
-dev = [
-    "pytest>=9.0.2",
-    "pre-commit>=4.5.1",
-    "tox-uv>=1.29.0",
-    "deptry>=0.24.0",
-    "mypy>=1.19.1",
-    "pytest-cov>=7.0.0",
-    "ruff>=0.14.10",
-    "mkdocs>=1.6.1",
-    "mkdocs-material>=9.7.1",
-    "mkdocstrings[python]>=1.0.0",
-]
-
 [tool.mypy]
 files = ["scirex"]
+exclude = "scirex/experimental"
 disallow_untyped_defs = true
 disallow_any_unimported = true
 no_implicit_optional = true
@@ -98,6 +98,7 @@ show_error_codes = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--ignore=tests/scirex/experimental"
 
 [tool.ruff]
 target-version = "py39"

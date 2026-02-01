@@ -15,4 +15,3 @@ The **NSDataset** class serves as the core data handling component for Navier-St
 | **Data Format** | NumPy arrays (.npy) |
 | **Input Pairs** | Coarse-grid inputs and corresponding fine-grid labels |
 | **Output Type** | PyTorch-compatible per-time-step tensors |
-

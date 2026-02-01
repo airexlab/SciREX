@@ -23,19 +23,19 @@
 # please contact: contact@scirex.org
 
 """
-    Module: pooling.py
+Module: pooling.py
 
-    This module implements pooling layers for Neural Networks using Flax.NNX.
+This module implements pooling layers for Neural Networks using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
-import jax.numpy as jnp
+
 from flax import nnx
 
 
@@ -43,6 +43,7 @@ class Pool(nnx.Module):
     """
     Performs a pooling operation
     """
+
     pass
 
 
@@ -50,6 +51,7 @@ class AvgPool(nnx.Module):
     """
     Performs an average pooling operation
     """
+
     pass
 
 
@@ -57,6 +59,7 @@ class AvgPool1d(nnx.Module):
     """
     Performs a 1D average pooling operation
     """
+
     pass
 
 
@@ -64,6 +67,7 @@ class AvgPool2d(nnx.Module):
     """
     Performs a 2D average pooling operation
     """
+
     pass
 
 
@@ -71,6 +75,7 @@ class AvgPool3d(nnx.Module):
     """
     Performs a 3D average pooling operation
     """
+
     pass
 
 
@@ -78,6 +83,7 @@ class MaxPool(nnx.Module):
     """
     Performs a max pooling operation
     """
+
     pass
 
 
@@ -85,6 +91,7 @@ class MaxPool1d(nnx.Module):
     """
     Performs a 1D max pooling operation
     """
+
     pass
 
 
@@ -92,6 +99,7 @@ class MaxPool2d(nnx.Module):
     """
     Performs a 2D max pooling operation
     """
+
     pass
 
 
@@ -99,6 +107,7 @@ class MaxPool3d(nnx.Module):
     """
     Performs a 3D max pooling operation
     """
+
     pass
 
 
@@ -106,6 +115,7 @@ class AdaptivePool(nnx.Module):
     """
     Performs an adaptive pooling operation
     """
+
     pass
 
 
@@ -113,6 +123,7 @@ class AdaptiveAvgPool1d(nnx.Module):
     """
     Performs a 1D adaptive average pooling operation
     """
+
     pass
 
 
@@ -120,6 +131,7 @@ class AdaptiveAvgPool2d(nnx.Module):
     """
     Performs a 2D adaptive average pooling operation
     """
+
     pass
 
 
@@ -127,6 +139,7 @@ class AdaptiveAvgPool3d(nnx.Module):
     """
     Performs a 3D adaptive average pooling operation
     """
+
     pass
 
 
@@ -134,6 +147,7 @@ class AdaptiveMaxPool1d(nnx.Module):
     """
     Performs a 1D adaptive max pooling operation
     """
+
     pass
 
 
@@ -141,6 +155,7 @@ class AdaptiveMaxPool2d(nnx.Module):
     """
     Performs a 2D adaptive max pooling operation
     """
+
     pass
 
 
@@ -148,4 +163,5 @@ class AdaptiveMaxPool3d(nnx.Module):
     """
     Performs a 3D adaptive max pooling operation
     """
+
     pass

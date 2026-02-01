@@ -24,7 +24,7 @@
 
 """
     Example Script: pruning.py
-    
+
     Model Pruning Implementation Module
 
 This module provides functionality for model pruning optimization, including system metrics
@@ -39,7 +39,7 @@ The module includes:
 
 Attributes:
     TechniqueType (Enum): Available optimization techniques
-    
+
 Authors:
     - Nithyashree R (nithyashreer@iisc.ac.in).
 """
@@ -70,7 +70,7 @@ class TechniqueType(Enum):
         PRUNING (str): Weight pruning technique
     """
     PRUNING = "pruning"
-    
+
 
 class OptimizationTechnique:
     """
@@ -84,7 +84,7 @@ class OptimizationTechnique:
     """
     def __init__(self, params: Dict[str, Any]):
         self.params = params
-        
+
     def apply(self, model: tf.keras.Model, train_data: Tuple[tf.Tensor, tf.Tensor],
              test_data: Tuple[tf.Tensor, tf.Tensor]) -> tf.keras.Model:
         """
@@ -285,7 +285,7 @@ class PruningTechnique(OptimizationTechnique):
         self.model = model
         train_images, train_labels = train_data
         test_images, test_labels = test_data
-        
+
         # Train baseline model
         print("\nTraining baseline model...")
         start_time = time.time()
@@ -373,9 +373,9 @@ def get_technique(technique_type: TechniqueType, params: Dict[str, Any]) -> Opti
         TechniqueType.PRUNING: PruningTechnique,
         # TechniqueType.QUANTIZATION: QuantizationTechnique,  # To be implemented
     }
-    
+
     technique_class = technique_map.get(technique_type)
     if technique_class is None:
         raise ValueError(f"Unsupported technique type: {technique_type}")
-    
+
     return technique_class(params)

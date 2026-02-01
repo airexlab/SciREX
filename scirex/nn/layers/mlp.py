@@ -23,29 +23,30 @@
 # please contact: contact@scirex.org
 
 """
-    Module: mlp.py
+Module: mlp.py
 
-    This module implements Multi-Layer Perceptron (MLP) neural network architecture using Flax.NNX.
+This module implements Multi-Layer Perceptron (MLP) neural network architecture using Flax.NNX.
 
-    Key Classes:
-        MLP: Multi-Layer Perceptron
+Key Classes:
+    MLP: Multi-Layer Perceptron
 
-    Key Features:
-        - Built on top of Flax.NNX getting all its functionalities
-        - Efficient neural networks implementation using flax.nnx modules
+Key Features:
+    - Built on top of Flax.NNX getting all its functionalities
+    - Efficient neural networks implementation using flax.nnx modules
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 02/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 02/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
-import jax
+
+from typing import Callable, Optional
+
 import jax.numpy as jnp
 from flax import nnx
-from typing import Callable, Sequence
 
 
 class MLP(nnx.Module):
@@ -61,7 +62,7 @@ class MLP(nnx.Module):
         depth: int = 0,
         activation: Callable = nnx.relu,
         final_activation: Callable = lambda x: x,
-        rngs: nnx.Rngs = nnx.Rngs(0),
+        rngs: Optional[nnx.Rngs] = None,
     ):
         """
         Constructor for Multi-Layer Perceptron
@@ -75,6 +76,8 @@ class MLP(nnx.Module):
             final_activation: Final activation function
             rngs: Random number generators
         """
+        if rngs is None:
+            rngs = nnx.Rngs(0)
         self.layers = []
         if depth == 0:
             self.layers.append(nnx.Linear(in_size, out_size, rngs=rngs))

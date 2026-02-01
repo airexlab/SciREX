@@ -1,5 +1,5 @@
-# This class is written by ixScience and can be found here 
-# https://github.com/ixScience/fourier_neural_operator/blob/master/data_generation/navier_stokes/random_fields.py 
+# This class is written by ixScience and can be found here
+# https://github.com/ixScience/fourier_neural_operator/blob/master/data_generation/navier_stokes/random_fields.py
 
 import torch
 import math

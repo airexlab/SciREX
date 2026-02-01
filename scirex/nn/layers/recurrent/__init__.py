@@ -23,15 +23,15 @@
 # please contact: contact@scirex.org
 
 """
-    Module: recurrent/__init__.py
+Module: recurrent/__init__.py
 
-    Exports for recurrent layers.
+Exports for recurrent layers.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version
+Version Info:
+    - 01/02/2026: Initial version
 
 """
 
@@ -44,10 +44,10 @@ from scirex.nn.layers.recurrent.cells import (
 from scirex.nn.layers.recurrent.wrappers import RNN, Bidirectional
 
 __all__ = [
+    "RNN",
+    "Bidirectional",
     "GRUCell",
     "LSTMCell",
     "OptimizedLSTMCell",
     "SimpleCell",
-    "RNN",
-    "Bidirectional",
 ]

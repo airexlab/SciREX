@@ -25,8 +25,8 @@
 
 """Loss Function Implementation for 2D Convection-Diffusion Problem.
 
-This module implements the loss function for solving 2D convection-diffusion 
-equations using Physics Informed Neural Networks. It focuses on computing 
+This module implements the loss function for solving 2D convection-diffusion
+equations using Physics Informed Neural Networks. It focuses on computing
 residuals of the PDE with known coefficients.
 
 

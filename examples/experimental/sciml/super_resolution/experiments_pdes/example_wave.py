@@ -29,7 +29,7 @@ import optax
 import matplotlib.pyplot as plt
 import os
 
-from scirex.eperimental.core.sciml.fno.models.fno_1d import FNO1d
+from scirex.experimental.sciml.fno.models.fno_1d import FNO1d
 
 
 def generate_wave_data(n_samples=1200, nx=64, nt=100, c=1.0):

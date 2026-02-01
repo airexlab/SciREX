@@ -33,7 +33,7 @@ datasets, and optimization strategies.
 Attributes:
     OptimizationTechnique (Enum): Available optimization techniques (pruning, quantization)
     ModelArchitecture (Enum): Supported model architecture families (base, cnn)
- 
+
 Authors:
  - Nithyashree R (nithyashreer@iisc.ac.in).
 
@@ -142,7 +142,7 @@ def main():
     """
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="Model Optimization Framework")
-    
+
     # Model selection arguments
     parser.add_argument("--arch", type=str, choices=[a.value for a in ModelArchitecture],
                        default=ModelArchitecture.BASE.value, help="Model architecture family")
@@ -151,34 +151,34 @@ def main():
                        default=DatasetType.MNIST.value, help="Dataset to use")
     parser.add_argument("--technique", type=str, choices=[t.value for t in OptimizationTechnique],
                        default=OptimizationTechnique.PRUNING.value, help="Optimization technique to apply")
-    
+
     # Common parameters
     parser.add_argument("--epochs", type=int, default=10, help="Number of training epochs")
     parser.add_argument("--batch-size", type=int, default=35, help="Training batch size")
     parser.add_argument("--validation-split", type=float, default=0.1,
                        help="Validation split ratio")
-    
+
     # Pruning-specific parameters
     parser.add_argument("--target-sparsity", type=float, default=0.75,
                        help="Target sparsity for pruning (only used with pruning)")
-    
+
     args = parser.parse_args()
-    
+
     # Convert string arguments to enum types
     arch_type = ModelArchitecture(args.arch)
     dataset_type = DatasetType(args.dataset)
     technique_type = OptimizationTechnique(args.technique)
     model_type = get_model_type(arch_type, args.model)
-    
+
     # Load dataset
     print(f"\nLoading {args.dataset} dataset...")
     dataset_info = DatasetLoader.get_dataset_info(dataset_type)
     train_data, test_data = DatasetLoader.load_dataset(dataset_type)
-    
+
     # Create model
     print(f"\nCreating {args.model} model from {args.arch} architecture...")
     model = get_model_instance(arch_type, model_type, dataset_info.input_shape, dataset_info.num_classes)
-    
+
     # Prepare common optimization parameters
     optimization_params = {
         "input_shape": dataset_info.input_shape,
@@ -187,7 +187,7 @@ def main():
         "batch_size": args.batch_size,
         "validation_split": args.validation_split
     }
-    
+
     # Apply optimization technique
     print(f"\nApplying {args.technique} optimization...")
     if technique_type == OptimizationTechnique.PRUNING:
@@ -195,10 +195,10 @@ def main():
         technique = get_pruning_technique(PruningType.PRUNING, optimization_params)
     else:  # QUANTIZATION
         # Note: Quantization typically requires larger batch sizes for better results
-        if args.batch_size == 35:  
-            optimization_params["batch_size"] = 500  
+        if args.batch_size == 35:
+            optimization_params["batch_size"] = 500
         technique = get_quantization_technique(QuantizationType.QUANTIZATION, optimization_params)
-    
+
     optimized_model = technique.apply(model, train_data, test_data)
     print("\nOptimization complete!")
 

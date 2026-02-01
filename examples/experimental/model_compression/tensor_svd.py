@@ -24,20 +24,20 @@
 
 """
 Example Script: tensor_svd.py
-    Implements matrix compression using SVD (Singular Value Decomposition) to demonstrate 
-    dimensionality reduction. Compresses a 50x40 matrix using different ranks and 
+    Implements matrix compression using SVD (Singular Value Decomposition) to demonstrate
+    dimensionality reduction. Compresses a 50x40 matrix using different ranks and
     analyzes compression ratio and accuracy.
 
     Features:
         - SVD-based matrix compression
         - Compression ratio analysis
         - Accuracy visualization
-        
+
     Dependencies: NumPy, Matplotlib
-    
+
     Authors:
        - Nithyashree R (nithyashreer@iisc.ac.in)
-        
+
     Version: 01/27/2025
 """
 

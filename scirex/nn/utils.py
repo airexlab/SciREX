@@ -23,18 +23,19 @@
 # please contact: contact@scirex.org
 
 """
-    Module: others.py
+Module: others.py
 
-    This module implements other helpful functions for Neural Networks
+This module implements other helpful functions for Neural Networks
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/01/2025: Initial version
-        - 06/01/2025: Rename and add other functions from jax.nn
+Version Info:
+    - 01/01/2025: Initial version
+    - 06/01/2025: Rename and add other functions from jax.nn
 
 """
+
 import jax
 
 

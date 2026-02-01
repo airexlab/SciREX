@@ -144,7 +144,7 @@ class SimpleCNN(BaseModel):
         return model
 
 
-def get_model(model_type: ModelType, input_shape: Tuple[int, ...], 
+def get_model(model_type: ModelType, input_shape: Tuple[int, ...],
              num_classes: int) -> tf.keras.Model:
     """
     Factory function to get the specified model.
@@ -165,9 +165,9 @@ def get_model(model_type: ModelType, input_shape: Tuple[int, ...],
     model_map = {
         ModelType.SIMPLE_CNN: SimpleCNN,
     }
-    
+
     model_class = model_map.get(model_type)
     if model_class is None:
         raise ValueError(f"Unsupported model type: {model_type}")
-    
+
     return model_class(input_shape, num_classes).build()

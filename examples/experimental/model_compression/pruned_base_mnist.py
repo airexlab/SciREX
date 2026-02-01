@@ -23,7 +23,7 @@
 # please contact: contact@scirex.org
 """
    Example Script: mnist_pruning_baseline.py
-   This script establishes a baseline model for pruning experiments using the MNIST dataset 
+   This script establishes a baseline model for pruning experiments using the MNIST dataset
    through TensorFlow Model Optimization Toolkit.
 
    This example includes:
@@ -39,7 +39,7 @@
 
 import numpy as np
 import tensorflow as tf
-from scirex.eperimental.core.model_compression.pruning import ModelPruning
+from scirex.experimental.model_compression.pruning import ModelPruning
 
 # Load MNIST dataset
 (train_images, train_labels), (test_images, test_labels) = (

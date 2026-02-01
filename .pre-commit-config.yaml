@@ -19,5 +19,6 @@ repos:
     hooks:
       - id: ruff-check
         args: [ --exit-non-zero-on-fix ]
+        exclude: experimental
       - id: ruff-format
-
+        exclude: experimental

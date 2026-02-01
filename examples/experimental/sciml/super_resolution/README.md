@@ -26,5 +26,3 @@ The **BicubicFNO** model uses a dual-branch strategy:
 The final output is the sum:
 
 $$u_{SR} = x_{bicubic} + x_{refined}$$
-
-

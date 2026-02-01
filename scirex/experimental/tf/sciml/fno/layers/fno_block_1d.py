@@ -55,7 +55,7 @@ import jax.numpy as jnp
 
 from typing import Callable
 
-from scirex.eperimental.core.sciml.fno.layers.spectral_conv_1d import SpectralConv1d
+from scirex.experimental.sciml.fno.layers.spectral_conv_1d import SpectralConv1d
 
 
 class FNOBlock1d(eqx.Module):

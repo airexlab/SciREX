@@ -27,7 +27,7 @@
 Model Quantization Implementation Module
 
 This module provides functionality for model quantization optimization, including system metrics
-collection and performance analysis. It supports quantization-aware training (QAT) of 
+collection and performance analysis. It supports quantization-aware training (QAT) of
 TensorFlow/Keras models with detailed performance tracking and metric reporting.
 
 The module includes:
@@ -39,7 +39,7 @@ The module includes:
 
 Attributes:
     TechniqueType (Enum): Available optimization techniques
-    
+
 Authors:
     - Nithyashree R (nithyashreer@iisc.ac.in).
 """
@@ -87,7 +87,7 @@ class OptimizationTechnique:
         """
         self.params = params
         self.system_info = self._get_system_info()
-        
+
     def _get_system_info(self) -> Dict[str, Any]:
         """
         Collect system hardware information.
@@ -117,7 +117,7 @@ class OptimizationTechnique:
                 info["gpu_name"] = f"GPU Device {len(gpus)}"
 
         return info
-        
+
     def apply(self, model: tf.keras.Model, train_data: Tuple[tf.Tensor, tf.Tensor],
              test_data: Tuple[tf.Tensor, tf.Tensor]) -> tf.keras.Model:
         """
@@ -174,7 +174,7 @@ class QuantizationTechnique(OptimizationTechnique):
 
         This method saves system information and model performance metrics
         to a CSV file in the user's Downloads directory.
-        
+
         :raises Exception: If there's an error saving the metrics file
         """
         downloads_dir = os.path.join(os.path.expanduser("~"), "Downloads")
@@ -273,18 +273,18 @@ class QuantizationTechnique(OptimizationTechnique):
         self.model = model
         train_images, train_labels = train_data
         test_images, test_labels = test_data
-        
+
         # Train baseline model
         print("\nTraining baseline model...")
         start_time = time.time()
         callbacks = [
             tf.keras.callbacks.EarlyStopping(
-                monitor="val_loss", 
-                patience=3, 
+                monitor="val_loss",
+                patience=3,
                 restore_best_weights=True
             )
         ]
-        
+
         self.model.fit(
             train_images,
             train_labels,
@@ -326,7 +326,7 @@ class QuantizationTechnique(OptimizationTechnique):
         # Convert to TFLite and measure sizes
         print("\nConverting models to TFLite...")
         self.convert_to_tflite()
-        
+
         # Save metrics
         self._save_metrics()
 
@@ -348,9 +348,9 @@ def get_technique(technique_type: TechniqueType, params: Dict[str, Any]) -> Opti
     technique_map = {
         TechniqueType.QUANTIZATION: QuantizationTechnique,
     }
-    
+
     technique_class = technique_map.get(technique_type)
     if technique_class is None:
         raise ValueError(f"Unsupported technique type: {technique_type}")
-    
+
     return technique_class(params)

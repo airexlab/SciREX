@@ -26,6 +26,7 @@
 # Version Info: 06/Jan/2025: Initial version - Thivin Anandh D
 
 from pathlib import Path
+
 import pytest
 
 
@@ -36,7 +37,7 @@ def test_copyright():
 
     # Get copyright header content
     try:
-        with open(root_dir / "CopyrightHeader.txt", "r") as f:
+        with open(root_dir / "CopyrightHeader.txt") as f:
             copyright_header = f.read().strip()
             # print("Header:", repr(copyright_header))
     except FileNotFoundError:
@@ -52,27 +53,23 @@ def test_copyright():
             python_files.extend(dir_path.rglob("*.py"))
 
     # remoce all __init__.py files
-    python_files = [
-        file_path for file_path in python_files if "__init__.py" not in str(file_path)
-    ]
+    python_files = [file_path for file_path in python_files if "__init__.py" not in str(file_path)]
 
     # Check each file for copyright header
     files_missing_header = []
     for file_path in python_files:
         try:
-            with open(file_path, "r") as f:
+            with open(file_path) as f:
                 content = f.read()
                 if copyright_header not in content:
                     files_missing_header.append(str(file_path))
         except Exception as e:
-            pytest.fail(f"Error reading file {file_path}: {str(e)}")
+            pytest.fail(f"Error reading file {file_path}: {e!s}")
 
     if files_missing_header:
         files_list = "\n".join(files_missing_header)
         print(f"The following files are missing the copyright header:\n{files_list}")
-        pytest.fail(
-            f"The following files are missing the copyright header:\n{files_list}"
-        )
+        pytest.fail(f"The following files are missing the copyright header:\n{files_list}")
 
 
 if __name__ == "__main__":

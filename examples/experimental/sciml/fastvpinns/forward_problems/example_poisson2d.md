@@ -68,7 +68,7 @@ Lets import the necessary functions for this tutorial from the
 FastVPINNs library.
 
 ``` python
-# Common library imports 
+# Common library imports
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -501,5 +501,3 @@ error_df = pd.DataFrame(
 print(error_df)
 
 ```
-
-

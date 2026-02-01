@@ -23,19 +23,20 @@
 # please contact: contact@scirex.org
 
 """
-    Module: loss.py
+Module: loss.py
 
-    This module implements loss functions for Neural Networks
-    Currenty, it uses optax library for loss functions
-    (documentation: https://optax.readthedocs.io/en/latest/api/losses.html)
+This module implements loss functions for Neural Networks
+Currenty, it uses optax library for loss functions
+(documentation: https://optax.readthedocs.io/en/latest/api/losses.html)
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/01/2025: Initial version
+Version Info:
+    - 01/01/2025: Initial version
 
 """
+
 import jax
 import jax.numpy as jnp
 import optax
@@ -85,7 +86,5 @@ sigmoid_binary_cross_entropy = optax.losses.sigmoid_binary_cross_entropy
 sigmoid_focal_loss = optax.losses.sigmoid_focal_loss
 smooth_labels = optax.losses.smooth_labels
 softmax_cross_entropy = optax.losses.softmax_cross_entropy
-softmax_cross_entropy_with_integer_labels = (
-    optax.losses.softmax_cross_entropy_with_integer_labels
-)
+softmax_cross_entropy_with_integer_labels = optax.losses.softmax_cross_entropy_with_integer_labels
 squared_error = optax.losses.squared_error

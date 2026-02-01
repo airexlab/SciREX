@@ -24,10 +24,10 @@
 
 """
 Datasets Module: datasets.py
-    
+
 MNIST Dataset Loading Module
 
-This module handles the loading and preprocessing of MNIST dataset. 
+This module handles the loading and preprocessing of MNIST dataset.
 
 - Loading raw MNIST data files via TensorFlow keras.datasets
 - Normalizing pixel values to [0,1] range
@@ -36,7 +36,7 @@ This module handles the loading and preprocessing of MNIST dataset.
 
 Attributes:
     DatasetType (Enum): Available dataset types
-    
+
 Authors:
     - Nithyashree R (nithyashreer@iisc.ac.in).
 """

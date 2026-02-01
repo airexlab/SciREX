@@ -23,17 +23,18 @@
 # please contact: contact@scirex.org
 
 """
-    Module: metrics.py
+Module: metrics.py
 
-    This module implements metrics for Neural Networks
+This module implements metrics for Neural Networks
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
+Version Info:
+    - 06/01/2025: Initial version
 
 """
+
 import jax
 import jax.numpy as jnp
 

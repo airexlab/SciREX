@@ -34,7 +34,7 @@ A TensorFlow implementation of a Convolutional Neural Network (CNN) that provide
 
 Attributes:
     ModelType (Enum): Available model architectures
-    
+
 Authors:
  - Nithyashree R (nithyashreer@iisc.ac.in).
 """
@@ -67,7 +67,7 @@ class BaseModel:
         input_shape (Tuple[int, ...]): Shape of the input tensor with channels
         num_classes (int): Number of output classes
     """
-    def __init__(self, input_shape: Union[Tuple[int, int], Tuple[int, int, int]], 
+    def __init__(self, input_shape: Union[Tuple[int, int], Tuple[int, int, int]],
                 num_classes: int):
         """
         Initialize the base model with automatic channel handling.
@@ -156,7 +156,7 @@ class SimpleCNN(BaseModel):
         return model
 
 
-def get_model(model_type: ModelType, input_shape: Union[Tuple[int, int], Tuple[int, int, int]], 
+def get_model(model_type: ModelType, input_shape: Union[Tuple[int, int], Tuple[int, int, int]],
              num_classes: int) -> tf.keras.Model:
     """
     Factory function to get the specified model.
@@ -177,9 +177,9 @@ def get_model(model_type: ModelType, input_shape: Union[Tuple[int, int], Tuple[i
     model_map = {
         ModelType.SIMPLE_CNN: SimpleCNN,
     }
-    
+
     model_class = model_map.get(model_type)
     if model_class is None:
         raise ValueError(f"Unsupported model type: {model_type}")
-    
+
     return model_class(input_shape, num_classes).build()

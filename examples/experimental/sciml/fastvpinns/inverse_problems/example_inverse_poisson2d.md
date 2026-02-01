@@ -126,9 +126,9 @@ import time
 from tqdm import tqdm
 
 # FastvPINNs specific modules
-from scirex.eperimental.core.sciml.geometry.geometry_2d import Geometry_2D
-from scirex.eperimental.core.sciml.fe.fespace2d import Fespace2D
-from scirex.eperimental.core.sciml.fastvpinns.data.datahandler2d import DataHandler2D
+from scirex.experimental.sciml.geometry.geometry_2d import Geometry_2D
+from scirex.experimental.sciml.fe.fespace2d import Fespace2D
+from scirex.experimental.sciml.fastvpinns.data.datahandler2d import DataHandler2D
 ```
 
 ### 2. Problem Configuration
@@ -221,7 +221,7 @@ def get_boundary_function_dict():
 
 def get_bound_cond_dict():
     """Define boundary condition types"""
-    return {1000: "dirichlet", 1001: "dirichlet", 
+    return {1000: "dirichlet", 1001: "dirichlet",
             1002: "dirichlet", 1003: "dirichlet"}
 
 def get_inverse_params_dict():
@@ -282,8 +282,8 @@ train_dirichlet_input, train_dirichlet_output = datahandler.get_dirichlet_input(
 
 # Get sensor data
 points, sensor_values = datahandler.get_sensor_data(
-    exact_solution, 
-    num_sensor_points=i_num_sensor_points, 
+    exact_solution,
+    num_sensor_points=i_num_sensor_points,
     mesh_type=i_mesh_generation_method
 )
 ```
@@ -316,7 +316,7 @@ model = DenseModel_Inverse(
 # Training loop
 for epoch in tqdm(range(i_num_epochs), desc="Training Model"):
     loss = model.train_step(beta=i_beta, bilinear_params_dict=bilinear_params_dict)
-    
+
     if epoch % 1000 == 0:
         print(f"Epoch: {epoch}")
         print(f"Variational Losses   || Pde Loss: {loss_pde:.3e} "
@@ -365,7 +365,7 @@ print(error_df)
 
 3. **Neural Network**: The architecture uses three hidden layers with 30 neurons each. This can be modified in the `layer_dims` parameter of `DenseModel_Inverse`.
 
-4. **Training Process**: 
+4. **Training Process**:
    - Uses a fixed learning rate of 0.002
    - Monitors both solution accuracy and parameter convergence
    - Prints detailed statistics every 1000 epochs

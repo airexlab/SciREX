@@ -1,1 +1,0 @@
-::: scirex.eperimental.core.sciml.fno.models.fno_1d

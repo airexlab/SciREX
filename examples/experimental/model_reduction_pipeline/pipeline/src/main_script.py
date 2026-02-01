@@ -38,7 +38,7 @@ Key Components:
     - Dataset management through DatasetLoader
     - Compression techniques through pruning and quantization modules
     - Command-line interface for easy usage
-    
+
 Authors:
  - Nithyashree R (nithyashreer@iisc.ac.in).
 

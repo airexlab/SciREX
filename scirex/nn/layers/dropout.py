@@ -23,18 +23,19 @@
 # please contact: contact@scirex.org
 
 """
-    Module: dropout.py
+Module: dropout.py
 
-    This module implements dropout layers for Neural Networks using Flax.NNX.
+This module implements dropout layers for Neural Networks using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
 from flax import nnx
 
 

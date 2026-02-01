@@ -23,18 +23,18 @@
 # please contact: contact@scirex.org
 
 """
-    Module: lora/lora.py
+Module: lora/lora.py
 
-    LoRA (Low-Rank Adaptation) implementations using Flax.NNX.
-    
-    LoRA is a parameter-efficient fine-tuning technique that reduces
-    computational cost by approximating weight changes using low-rank matrices.
+LoRA (Low-Rank Adaptation) implementations using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+LoRA is a parameter-efficient fine-tuning technique that reduces
+computational cost by approximating weight changes using low-rank matrices.
 
-    Version Info:
-        - 01/02/2026: Initial version
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
+
+Version Info:
+    - 01/02/2026: Initial version
 
 """
 
@@ -44,40 +44,41 @@ from flax import nnx
 class LoRAParam(nnx.LoRAParam):
     """
     LoRA parameter wrapper.
-    
+
     Wraps a parameter to enable LoRA adaptation.
-    
+
     Args:
         lora_rank: Rank of the low-rank adaptation matrices
-        
+
     Example:
         >>> from flax import nnx
         >>> import jax.numpy as jnp
-        >>> 
+        >>>
         >>> # Create a LoRA parameter
         >>> param = LoRAParam(lora_rank=4)
     """
+
     pass
 
 
 class LoRA(nnx.LoRA):
     """
     LoRA (Low-Rank Adaptation) layer.
-    
+
     Implements parameter-efficient fine-tuning by learning low-rank
     updates to weight matrices: W' = W + BA, where B and A are low-rank.
-    
+
     Args:
         in_features: Number of input features
         out_features: Number of output features
         lora_rank: Rank of the adaptation matrices (default: 4)
         base_module: Optional base module to wrap
         rngs: Random number generators
-        
+
     Example:
         >>> from flax import nnx
         >>> import jax.numpy as jnp
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> lora = LoRA(
         ...     in_features=64,
@@ -87,34 +88,35 @@ class LoRA(nnx.LoRA):
         ... )
         >>> x = jnp.ones((16, 64))
         >>> output = lora(x)  # Shape: (16, 32)
-        
+
     Note:
         LoRA is particularly useful for fine-tuning large models where
         full parameter updates are computationally expensive. By using
         low-rank matrices, you can achieve good performance with far
         fewer trainable parameters.
     """
+
     pass
 
 
 class LoRALinear(nnx.LoRALinear):
     """
     Linear layer with LoRA adaptation.
-    
+
     Wraps a standard linear layer with LoRA, allowing efficient fine-tuning
     while maintaining compatibility with the original layer structure.
-    
+
     Args:
         in_features: Number of input features
         out_features: Number of output features
         lora_rank: Rank of the adaptation matrices (default: 4)
         use_bias: Whether to use bias (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> from flax import nnx
         >>> import jax.numpy as jnp
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> # Create a LoRA-enabled linear layer
         >>> lora_linear = LoRALinear(
@@ -125,11 +127,12 @@ class LoRALinear(nnx.LoRALinear):
         ... )
         >>> x = jnp.ones((16, 64))
         >>> output = lora_linear(x)  # Shape: (16, 32)
-        
+
     Typical Usage:
         1. Pre-train a model with standard Linear layers
         2. Replace Linear with LoRALinear for fine-tuning
         3. Freeze base weights, train only LoRA parameters
         4. Achieve good performance with ~1% of parameters
     """
+
     pass

@@ -42,9 +42,9 @@ class FNO2d(nn.Module):
         self.modes1 = modes1
         self.modes2 = modes2
         self.width = width
-        
+
         self.fc0 = nn.Linear(1, self.width)  # input channel is 1: the vorticity field
-        
+
         self.conv0 = SpectralConv2d(self.width, self.width, self.modes1, self.modes2)
         self.conv1 = SpectralConv2d(self.width, self.width, self.modes1, self.modes2)
         self.conv2 = SpectralConv2d(self.width, self.width, self.modes1, self.modes2)
@@ -53,7 +53,7 @@ class FNO2d(nn.Module):
         self.w1 = nn.Conv2d(self.width, self.width, 1)
         self.w2 = nn.Conv2d(self.width, self.width, 1)
         self.w3 = nn.Conv2d(self.width, self.width, 1)
-        
+
         self.fc1 = nn.Linear(self.width, 128)
         self.fc2 = nn.Linear(128, 1)
 
@@ -62,26 +62,26 @@ class FNO2d(nn.Module):
         x = x.unsqueeze(-1)  # (batch, H, W, 1)
         x = self.fc0(x)
         x = x.permute(0, 3, 1, 2)  # (batch, width, H, W)
-        
+
         x1 = self.conv0(x)
         x2 = self.w0(x)
         x = x1 + x2
         x = F.gelu(x)
-        
+
         x1 = self.conv1(x)
         x2 = self.w1(x)
         x = x1 + x2
         x = F.gelu(x)
-        
+
         x1 = self.conv2(x)
         x2 = self.w2(x)
         x = x1 + x2
         x = F.gelu(x)
-        
+
         x1 = self.conv3(x)
         x2 = self.w3(x)
         x = x1 + x2
-        
+
         x = x.permute(0, 2, 3, 1)  # (batch, H, W, width)
         x = self.fc1(x)
         x = F.gelu(x)

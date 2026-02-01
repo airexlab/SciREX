@@ -24,15 +24,15 @@
 
 """
     Example Script: pruned_mnist.py
-    
-    This script demonstrates the application of model pruning on the MNIST dataset using TensorFlow 
+
+    This script demonstrates the application of model pruning on the MNIST dataset using TensorFlow
     Model Optimization Toolkit. The pruning process reduces model size while maintaining accuracy.
 
     This example includes:
         - Loading and preprocessing MNIST dataset
         - Implementing model pruning for compression
         - Training and evaluating pruned models
-        
+
 
     Authors:
         - Nithyashree R (nithyashreer@iisc.ac.in)
@@ -43,7 +43,7 @@
 
 import numpy as np
 import tensorflow as tf
-from scirex.eperimental.core.model_compression.pruning import ModelPruning
+from scirex.experimental.model_compression.pruning import ModelPruning
 
 # Load MNIST dataset
 (train_images, train_labels), (test_images, test_labels) = (

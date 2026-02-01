@@ -5,7 +5,7 @@ This repository demonstrates two popular model compression techniques - Pruning 
 
 Model compression is a technique used to reduce the size of neural networks while maintaining their performance. This is particularly important for deploying models on devices with limited resources like mobile phones or edge devices.
 
-## Techniques Implemented 
+## Techniques Implemented
 
 ## 1. Pruning
 Network pruning involves systematically removing redundant or less important parameters (weights and connections) from a trained neural network while preserving its performance. It works by identifying and eliminating weights that have minimal impact on the model's output, effectively reducing the network's size and computational requirements without significantly degrading accuracy.
@@ -192,8 +192,8 @@ SVD (Singular Value Decomposition) is a matrix factorization technique that deco
 
     A (m×n) = U (m×m) × Σ (m×n) × V^T (n×n)
 
-- A is any m×n matrix 
-- U and V are orthogonal matrices 
+- A is any m×n matrix
+- U and V are orthogonal matrices
 - Σ contains singular values in descending order.
 
 ### Overview
@@ -316,4 +316,3 @@ PYTHONPATH=$(pwd) python3 "examples/model compression/tensor_svd.py"
 - TensorFlow
 - NumPy
 - matplotlib
-

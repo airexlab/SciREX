@@ -23,22 +23,23 @@
 # please contact: contact@scirex.org
 
 """
-    Module: sequential.py
+Module: sequential.py
 
-    This module implements sequential layers for Neural Networks using Flax.NNX.
+This module implements sequential layers for Neural Networks using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
+from typing import Callable
+
 import jax
-import jax.numpy as jnp
 from flax import nnx
-from typing import Callable, List
 
 
 class Sequential(nnx.Module):
@@ -46,24 +47,24 @@ class Sequential(nnx.Module):
     Implements a Sequential layer, which is a stack of layers.
     Optimized for efficient forward passes.
     """
-    
-    def __init__(self, layers: List[nnx.Module]):
+
+    def __init__(self, layers: list[nnx.Module]):
         """
         Initialize Sequential with a list of layers.
-        
+
         Args:
             layers: List of nnx.Module layers to apply sequentially
         """
         self.layers = layers
-    
+
     def __call__(self, x: jax.Array) -> jax.Array:
         """
         Forward pass through all layers sequentially.
         Optimized to minimize overhead.
-        
+
         Args:
             x: Input tensor
-            
+
         Returns:
             Output tensor after passing through all layers
         """
@@ -77,15 +78,16 @@ class Lambda(nnx.Module):
     Implements a Lambda layer (which wraps a callable for use with Sequential).
     Useful for adding custom transformations in a Sequential pipeline.
     """
+
     def __init__(self, fn: Callable):
         """
         Initialize Lambda layer with a callable.
-        
+
         Args:
             fn: Callable function to apply to inputs
         """
         self.fn = fn
-    
+
     def __call__(self, x: jax.Array) -> jax.Array:
         """Apply the wrapped function to the input."""
         return self.fn(x)
@@ -96,4 +98,5 @@ class StatefulLayer(nnx.Module):
     Base class for stateful layers using Flax.NNX.
     All NNX modules are stateful by default.
     """
+
     pass

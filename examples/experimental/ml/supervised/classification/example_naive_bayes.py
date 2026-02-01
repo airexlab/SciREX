@@ -32,7 +32,7 @@
         - scikit-learn
         - pandas
         - numpy
-        - scirex.eperimental.core.ml.unsupervised.clustering.kmeans.NaiveBayes
+        - scirex.experimental.ml.unsupervised.clustering.kmeans.NaiveBayes
 
     Example Usage:
         Run this script to load the Iris dataset, fit the NaiveBayes
@@ -53,7 +53,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 
 # SciREX NaiveBayes import
-from scirex.eperimental.core.ml.supervised.classification.naive_bayes import NaiveBayes
+from scirex.experimental.ml.supervised.classification.naive_bayes import NaiveBayes
 
 # Load the Iris dataset
 data = load_iris()

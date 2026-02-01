@@ -23,17 +23,18 @@
 # please contact: contact@scirex.org
 
 """
-    Module: activation.py
+Module: activation.py
 
-    This module implements activation functions for Neural Networks
+This module implements activation functions for Neural Networks
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/01/2025: Initial version
+Version Info:
+    - 01/01/2025: Initial version
 
 """
+
 import jax
 
 

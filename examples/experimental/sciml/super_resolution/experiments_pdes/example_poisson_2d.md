@@ -76,7 +76,7 @@ def generate_source_term(key):
     """Generate random source term f(x,y) as sum of Gaussians"""
     k1, k2, k3 = jax.random.split(key, 3)
     n_sources = 3
-    
+
     # Random parameters for Gaussian sources
     amplitudes = jax.random.uniform(k1, (n_sources,), minval=-1.0, maxval=1.0)
     centers_x = jax.random.uniform(k2, (n_sources,), minval=0.2, maxval=0.8)
@@ -91,7 +91,7 @@ def solve_poisson(f):
     kx = 2 * jnp.pi * jnp.fft.fftfreq(nx)
     ky = 2 * jnp.pi * jnp.fft.fftfreq(ny)
     KX, KY = jnp.meshgrid(kx, ky)
-    
+
     # Solution in Fourier space
     f_hat = jnp.fft.fft2(f)
     denominator = -(KX**2 + KY**2)
@@ -107,7 +107,7 @@ class SpectralConv2d(eqx.Module):
     def __call__(self, x):
         # Transform to Fourier space
         x_ft = jnp.fft.rfft2(x)
-        
+
         # Multiply relevant Fourier modes
         out_ft = jnp.zeros((self.out_channels, x.shape[1], x_ft.shape[-1]),
                           dtype=jnp.complex64)
@@ -129,7 +129,7 @@ def make_step(model, opt_state, batch):
     def loss_fn(model):
         pred = jax.vmap(model)(batch[0])
         return jnp.mean((pred - batch[1])**2)
-    
+
     loss, grads = eqx.filter_value_and_grad(loss_fn)(model)
     updates, opt_state = optimizer.update(grads, opt_state, model)
     model = eqx.apply_updates(model, updates)
@@ -144,13 +144,13 @@ The implementation generates three visualizations:
     - Source term f(x,y): Shows the input Gaussian sources with varying amplitudes
     - True solution u(x,y): Ground truth solution computed using spectral method
     - FNO prediction: Network's predicted solution showing learned mapping from source to potential
-    
-2. `poisson_loss.png`: 
+
+2. `poisson_loss.png`:
     - Training loss curve over iterations
     - Y-axis in log scale showing MSE loss
     - Demonstrates convergence behavior of the FNO training
-    
-3. `poisson_error.png`: 
+
+3. `poisson_error.png`:
     - Error distribution analysis showing absolute difference |u_pred - u_true|
     - 2D heatmap highlighting regions of higher prediction error
     - Helps identify where the FNO struggles (typically near boundaries or sharp gradients)
@@ -168,4 +168,3 @@ outputs/fno/poisson/
 
 ![Poisson Example](outputs/poisson/poisson_example.png)
 ![Training loss](outputs/poisson/poisson_loss.png)
-

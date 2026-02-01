@@ -23,15 +23,15 @@
 # please contact: contact@scirex.org
 
 """
-    Module: normalization/layer.py
+Module: normalization/layer.py
 
-    Layer normalization and RMS normalization using Flax.NNX.
+Layer normalization and RMS normalization using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version (migrated from normalisation.py)
+Version Info:
+    - 01/02/2026: Initial version (migrated from normalisation.py)
 
 """
 
@@ -41,49 +41,51 @@ from flax import nnx
 class LayerNorm(nnx.LayerNorm):
     """
     Layer Normalization.
-    
+
     Normalizes inputs across the feature dimension, independent of batch size.
     Particularly effective for RNNs and Transformers.
-    
+
     Args:
         num_features: Number of features to normalize
         epsilon: Small constant for numerical stability (default: 1e-5)
         use_bias: Whether to use bias parameter (default: True)
         use_scale: Whether to use scale parameter (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> import jax.numpy as jnp
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> ln = LayerNorm(num_features=64, rngs=rngs)
         >>> x = jnp.ones((32, 64))
         >>> output = ln(x)
     """
+
     pass
 
 
 class RMSNorm(nnx.RMSNorm):
     """
     Root Mean Square Layer Normalization.
-    
+
     A simplified version of LayerNorm that only uses RMS for normalization,
     without mean centering. More efficient and often performs similarly to LayerNorm.
-    
+
     Args:
         num_features: Number of features to normalize
         epsilon: Small constant for numerical stability (default: 1e-6)
         use_scale: Whether to use scale parameter (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> import jax.numpy as jnp
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> rms = RMSNorm(num_features=64, rngs=rngs)
         >>> x = jnp.ones((32, 64))
         >>> output = rms(x)
     """
+
     pass

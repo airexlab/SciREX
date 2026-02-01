@@ -56,7 +56,7 @@ def generate_initial_condition(key):
     positions = jax.random.uniform(k1, (max_pulses,)) * L
     widths = jax.random.uniform(k2, (max_pulses,)) * 0.2 + 0.1
     amplitudes = jax.random.uniform(k3, (max_pulses,)) * 0.8 + 0.2
-    
+
     u0 = jnp.zeros(nx)
     for pos, width, amp in zip(positions, widths, amplitudes):
         u0 += amp * jnp.exp(-(x - pos)**2 / (2 * width**2))
@@ -69,7 +69,7 @@ def solve_heat_equation(u0):
     """Solve using explicit finite differences"""
     u = jnp.zeros((nt, nx))
     u = u.at[0].set(u0)
-    
+
     for n in range(1, nt):
         u = u.at[n].set(
             u[n-1] + D * dt/dx**2 * (
@@ -86,7 +86,7 @@ def make_step(model, opt_state, batch):
     def loss_fn(model):
         pred = jax.vmap(model)(batch[0])
         return jnp.mean((pred - batch[1])**2)
-    
+
     loss, grads = eqx.filter_value_and_grad(loss_fn)(model)
     updates, opt_state = optimizer.update(grads, opt_state, model)
     model = eqx.apply_updates(model, updates)
@@ -123,4 +123,3 @@ outputs/fno/heat/
 ![Example prediction](outputs/heat/example_prediction.png)
 ![Training loss](outputs/heat/training_loss.png)
 ![Absolute error](outputs/heat/absolute_error.png)
-

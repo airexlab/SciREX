@@ -42,9 +42,9 @@ import time
 from tqdm import tqdm
 
 # Fastvpinns Modules
-from scirex.eperimental.core.sciml.geometry.geometry_2d import Geometry_2D
-from scirex.eperimental.core.sciml.fe.fespace2d import Fespace2D
-from scirex.eperimental.core.sciml.fastvpinns.data.datahandler2d import DataHandler2D
+from scirex.experimental.sciml.geometry.geometry_2d import Geometry_2D
+from scirex.experimental.sciml.fe.fespace2d import Fespace2D
+from scirex.experimental.sciml.fastvpinns.data.datahandler2d import DataHandler2D
 
 # Section: Inputs
 
@@ -263,8 +263,8 @@ datahandler = DataHandler2D(fespace, domain, dtype=i_dtype)
 params_dict = {}
 params_dict["n_cells"] = fespace.n_cells
 
-from scirex.eperimental.core.sciml.fastvpinns.model.model_inverse import DenseModel_Inverse
-from scirex.eperimental.core.sciml.fastvpinns.physics.poisson2d_inverse import (
+from scirex.experimental.sciml.fastvpinns.model.model_inverse import DenseModel_Inverse
+from scirex.experimental.sciml.fastvpinns.physics.poisson2d_inverse import (
     pde_loss_poisson_inverse,
 )
 

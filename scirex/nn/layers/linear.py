@@ -23,18 +23,19 @@
 # please contact: contact@scirex.org
 
 """
-    Module: linear.py
+Module: linear.py
 
-    This module implements linear layers for Neural Networks using Flax.NNX.
+This module implements linear layers for Neural Networks using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX, added LinearGeneral and Einsum
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX, added LinearGeneral and Einsum
 
 """
+
 import jax
 from flax import nnx
 
@@ -42,19 +43,19 @@ from flax import nnx
 class Linear(nnx.Linear):
     """
     Implements a Linear layer (fully connected layer).
-    
+
     Performs the operation: output = input @ kernel + bias
-    
+
     Args:
         in_features: Number of input features
         out_features: Number of output features
         use_bias: Whether to include bias term (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> from flax import nnx
         >>> import jax.numpy as jnp
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> layer = Linear(in_features=64, out_features=32, rngs=rngs)
         >>> x = jnp.ones((16, 64))
@@ -62,16 +63,17 @@ class Linear(nnx.Linear):
         >>> output.shape
         (16, 32)
     """
+
     pass
 
 
 class LinearGeneral(nnx.LinearGeneral):
     """
     General linear transformation with flexible axis handling.
-    
+
     More flexible than Linear, allowing transformations over arbitrary axes.
     Useful for attention mechanisms and complex tensor operations.
-    
+
     Args:
         in_features: Number or tuple of input feature dimensions
         out_features: Number or tuple of output feature dimensions
@@ -79,11 +81,11 @@ class LinearGeneral(nnx.LinearGeneral):
         batch_axis: Batch axes to preserve (default: ())
         use_bias: Whether to include bias term (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> from flax import nnx
         >>> import jax.numpy as jnp
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> # Transform last two dimensions
         >>> layer = LinearGeneral(in_features=(8, 8), out_features=64, rngs=rngs)
@@ -92,25 +94,26 @@ class LinearGeneral(nnx.LinearGeneral):
         >>> output.shape
         (16, 64)
     """
+
     pass
 
 
 class Einsum(nnx.Einsum):
     """
     Einstein summation layer for complex tensor operations.
-    
+
     Provides a flexible way to express complex linear transformations
     using Einstein notation.
-    
+
     Args:
         shape: Shape of the weight tensor
         einsum_str: Einstein summation string (e.g., "...i,ij->...j")
         rngs: Random number generators
-        
+
     Example:
         >>> from flax import nnx
         >>> import jax.numpy as jnp
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> # Matrix multiplication: batch @ weights
         >>> layer = Einsum(shape=(64, 32), einsum_str="...i,ij->...j", rngs=rngs)
@@ -119,6 +122,7 @@ class Einsum(nnx.Einsum):
         >>> output.shape
         (16, 32)
     """
+
     pass
 
 
@@ -126,5 +130,6 @@ class Identity(nnx.Module):
     """
     Does nothing, useful as a placeholder
     """
+
     def __call__(self, x: jax.Array) -> jax.Array:
         return x

@@ -10,7 +10,7 @@ This directory contains 2D Fourier Neural Operator implementations used for PDE 
 ## Quick usage
 
 ```python
-from scirex.eperimental.torch.sciml.models.fno.bicubic_fno import BicubicFNO
+from scirex.experimental.torch.sciml.models.fno.bicubic_fno import BicubicFNO
 
 model = BicubicFNO(modes1=12, modes2=12, width=32)
 # lr: Tensor of shape (batch, 16, 16)
@@ -22,4 +22,3 @@ hr_pred, hr_bicubic = model(lr)
 
 - `SpectralConv2d` uses truncated Fourier modes to perform efficient spectral convolutions.
 - `BicubicFNO` returns a tuple `(x_out, x_bicubic)` where `x_out = x_bicubic + x_refined`.
-

@@ -23,18 +23,19 @@
 # please contact: contact@scirex.org
 
 """
-    Module: recurrent.py
+Module: recurrent.py
 
-    This module implements recurrent layers for Neural Networks using Flax.NNX.
+This module implements recurrent layers for Neural Networks using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
 from flax import nnx
 
 

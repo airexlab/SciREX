@@ -23,15 +23,15 @@
 # please contact: contact@scirex.org
 
 """
-    Module: normalization/batch.py
+Module: normalization/batch.py
 
-    Batch normalization layer using Flax.NNX.
+Batch normalization layer using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version (migrated from normalisation.py)
+Version Info:
+    - 01/02/2026: Initial version (migrated from normalisation.py)
 
 """
 
@@ -41,24 +41,25 @@ from flax import nnx
 class BatchNorm(nnx.BatchNorm):
     """
     Batch Normalization layer.
-    
+
     Normalizes inputs across the batch dimension for improved training stability
     and faster convergence.
-    
+
     Args:
         num_features: Number of features/channels to normalize
         momentum: Momentum for running statistics (default: 0.99)
         epsilon: Small constant for numerical stability (default: 1e-5)
         use_running_average: Whether to use running statistics (default: None, auto-determined)
         rngs: Random number generators
-        
+
     Example:
         >>> import jax.numpy as jnp
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> bn = BatchNorm(num_features=64, rngs=rngs)
         >>> x = jnp.ones((32, 64))  # batch_size=32, features=64
         >>> output = bn(x)
     """
+
     pass

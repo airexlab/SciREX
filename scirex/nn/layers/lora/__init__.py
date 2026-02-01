@@ -23,15 +23,15 @@
 # please contact: contact@scirex.org
 
 """
-    Module: lora/__init__.py
+Module: lora/__init__.py
 
-    Exports for LoRA (Low-Rank Adaptation) layers.
+Exports for LoRA (Low-Rank Adaptation) layers.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version
+Version Info:
+    - 01/02/2026: Initial version
 
 """
 

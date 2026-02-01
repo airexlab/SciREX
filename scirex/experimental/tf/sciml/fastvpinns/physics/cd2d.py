@@ -26,8 +26,8 @@
 
 """Loss Function Implementation for 2D Convection-Diffusion Problem.
 
-This module implements the loss function for solving 2D convection-diffusion 
-equations using neural networks. It focuses on computing residuals in the weak 
+This module implements the loss function for solving 2D convection-diffusion
+equations using neural networks. It focuses on computing residuals in the weak
 form of the PDE with known coefficients.
 
 

@@ -31,22 +31,22 @@ class NSDataset(Dataset):
         self.lr_data = torch.from_numpy(lr_data).float()
         self.hr_data = torch.from_numpy(hr_data).float()
         self.transform = transform
-        
+
     def __len__(self):
         N, _, _, T = self.lr_data.shape
         return N * T
-    
+
     def __getitem__(self, idx):
         N, _, _, T = self.lr_data.shape
         sample_idx = idx // T
         time_idx = idx % T
-        
+
         lr = self.lr_data[sample_idx, :, :, time_idx]
         hr = self.hr_data[sample_idx, :, :, time_idx]
-        
+
         if self.transform:
             lr, hr = self.transform(lr, hr)
-        
+
         return lr, hr
 
 # Create train/val split

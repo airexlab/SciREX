@@ -28,7 +28,7 @@
 """Loss Function Implementation for 2D Helmholtz Problem.
 
 This module implements the loss function for solving the 2D Helmholtz equation
-using neural networks. It focuses on computing residuals in the weak form 
+using neural networks. It focuses on computing residuals in the weak form
 of the PDE with wave number parameter.
 
 

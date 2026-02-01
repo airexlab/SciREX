@@ -1,6 +1,6 @@
 # SciREX Neural Networks (`scirex.nn`)
 
-A high-performance neural network library built on **Flax.NNX** and **JAX**, providing efficient, 
+A high-performance neural network library built on **Flax.NNX** and **JAX**, providing efficient,
 hardware-accelerated deep learning capabilities for scientific computing and research.
 
 ## Overview
@@ -144,7 +144,7 @@ class CustomNet(Network):
             Linear(256, 128, rngs=rngs),
             Linear(128, 10, rngs=rngs)
         ])
-    
+
     def __call__(self, x):
         for i, layer in enumerate(self.seq.layers):
             x = layer(x)

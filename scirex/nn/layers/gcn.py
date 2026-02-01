@@ -23,30 +23,33 @@
 # please contact: contact@scirex.org
 
 """
-    Module: gcn.py
+Module: gcn.py
 
-    This module implements Graph Convolution Networks (GCNs) using Flax.NNX.
+This module implements Graph Convolution Networks (GCNs) using Flax.NNX.
 
-    It provides functionality to:
-        - Perform transformations on Graphs using GCN
-        - Train GCNs for a loss function
+It provides functionality to:
+    - Perform transformations on Graphs using GCN
+    - Train GCNs for a loss function
 
-    Key Features:
-        - Built on top of base class getting all its functionalities
-        - Efficient neural networks implementation using flax.nnx modules
+Key Features:
+    - Built on top of base class getting all its functionalities
+    - Efficient neural networks implementation using flax.nnx modules
 
-    Authors:
-        - Rajarshi Dasgupta (rajarshid@iisc.ac.in)
+Authors:
+    - Rajarshi Dasgupta (rajarshid@iisc.ac.in)
 
-    Version Info:
-        - 10/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 10/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
+from typing import Optional
+
 import jax
 import jax.numpy as jnp
-from flax import nnx
 import optax
+from flax import nnx
 from tqdm import tqdm
 
 
@@ -94,7 +97,7 @@ class GCNModel:
         self,
         gcn: GCN,
         loss_fn: callable,
-        metrics: list[callable] = [],
+        metrics: Optional[list[callable]] = None,
     ):
         """
         Initialize the gcn model with network architecture and training parameters.
@@ -104,6 +107,8 @@ class GCNModel:
             loss_fn (Callable): Loss function for training.
             metrics (list[Callable]): List of metric functions for evaluation.
         """
+        if metrics is None:
+            metrics = []
         self.gcn = gcn
         self.loss_fn = loss_fn
         self.metrics = metrics
@@ -166,6 +171,7 @@ class GCNModel:
         Returns:
             Average loss for the batch
         """
+
         def loss_fn(gcn):
             output = gcn(features, adjacency_matrix, degree_array)
             return self.loss_fn(output, target).mean()

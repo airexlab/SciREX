@@ -103,8 +103,8 @@ pip install -e .
 ```bash
 pytest tests/
 ```
-5. Run black formatter: 
-```bash 
+5. Run black formatter:
+```bash
 black filename
 ```
 6. Create a pull request
@@ -159,7 +159,7 @@ We follow the [Google Python Style Guide](https://google.github.io/styleguide/py
 def solve_navier_stokes(reynolds_number, initial_conditions):
     velocity_field = initialize_flow_field()
     pressure_gradient = compute_pressure_gradient()
-    
+
 # Bad
 def solveNS(re, ic):
     v = init_flow()
@@ -169,8 +169,8 @@ def solveNS(re, ic):
 ##### Docstring Format
 ```python
 def compute_finite_difference(
-    function_values: np.ndarray, 
-    dx: float, 
+    function_values: np.ndarray,
+    dx: float,
     order: int = 2
 ) -> np.ndarray:
     """Computes finite difference approximation of derivatives.
@@ -199,7 +199,7 @@ def compute_finite_difference(
         4th order: f'(x) ≈ (-f(x+2h) + 8f(x+h) - 8f(x-h) + f(x-2h))/(12h)
 
     References:
-        [1] LeVeque, R. J. (2007). Finite Difference Methods for Ordinary 
+        [1] LeVeque, R. J. (2007). Finite Difference Methods for Ordinary
             and Partial Differential Equations.
     """
 ```
@@ -225,7 +225,7 @@ Note that all solvers assume a well-posed problem with appropriate boundary
 conditions.
 
 References:
-    [1] Hughes, T. J. R. (2000). The Finite Element Method: Linear Static and 
+    [1] Hughes, T. J. R. (2000). The Finite Element Method: Linear Static and
         Dynamic Finite Element Analysis.
 """
 ```
@@ -234,24 +234,24 @@ References:
 ```python
 class AdaptiveMesh:
     """A mesh that adapts based on solution features.
-    
+
     This class implements adaptive mesh refinement/coarsening based on
     error estimates. The refinement strategy follows the procedure outlined
     in Bank et al. (1983).
-    
+
     Attributes:
         nodes: Array of node coordinates, shape (n_nodes, dimension)
         elements: Array of element connectivity, shape (n_elements, nodes_per_element)
         error_estimator: Callable that computes error estimates
         refinement_threshold: Float, threshold for mesh refinement
-        
+
     Example:
         >>> mesh = AdaptiveMesh(domain=[0, 1], initial_elements=10)
         >>> mesh.refine(error_threshold=1e-3)
         >>> solution = solve_pde(mesh)
-    
+
     References:
-        [1] Bank, R. E., Sherman, A. H., & Weiser, A. (1983). "Refinement 
+        [1] Bank, R. E., Sherman, A. H., & Weiser, A. (1983). "Refinement
             Algorithms and Data Structures for Regular Local Mesh Refinement"
     """
 ```
@@ -260,16 +260,16 @@ class AdaptiveMesh:
 ```python
 def integrate_numerically(function, bounds, method='gauss'):
     """Performs numerical integration using specified method.
-    
+
     Args:
         function: Callable to integrate
         bounds: Tuple of (lower, upper) bounds
         method: Integration method ('gauss' or 'simpson')
-        
+
     Raises:
         ValueError: If bounds are invalid or method is unsupported
         IntegrationError: If integration fails to converge
-        
+
     Note:
         For singular integrands, consider using adaptive methods
     """
@@ -277,7 +277,7 @@ def integrate_numerically(function, bounds, method='gauss'):
         raise ValueError(
             f"Lower bound {bounds[0]} must be less than upper bound {bounds[1]}"
         )
-    
+
     try:
         result = _perform_integration(function, bounds, method)
     except ConvergenceError as e:
@@ -303,22 +303,22 @@ Example docstring:
 ```python
 def solve_pde(mesh, boundary_conditions, tolerance=1e-6):
     """Solves partial differential equations using the finite element method.
-    
+
     Implements the algorithm described in [Smith et al., 2023] using an adaptive
     mesh refinement strategy.
-    
+
     The method solves the equation:
-    
+
     ∂u/∂t = α∇²u + f(x,t)
-    
+
     Args:
         mesh (FEMesh): Finite element mesh object
         boundary_conditions (dict): Dictionary of boundary conditions
         tolerance (float, optional): Convergence tolerance. Defaults to 1e-6
-        
+
     Returns:
         np.ndarray: Solution vector on mesh nodes
-        
+
     References:
         [1] Smith et al. (2023). Advanced PDE Solvers. J. Comp. Physics
     """

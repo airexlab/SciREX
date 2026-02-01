@@ -23,29 +23,31 @@
 # please contact: contact@scirex.org
 
 """
-    Module: fcnn.py
+Module: fcnn.py
 
-    This module implements Fully Connected Neural Networks using Flax.NNX.
+This module implements Fully Connected Neural Networks using Flax.NNX.
 
-    It provides functionality to:
-      - Train Fully Connected Neural Networks
+It provides functionality to:
+  - Train Fully Connected Neural Networks
 
-    Classes:
-        FCNN: Implements a Fully Connected Neural Network building up on `base.py`.
+Classes:
+    FCNN: Implements a Fully Connected Neural Network building up on `base.py`.
 
-    Key Features:
-        - Built on top of base class getting all its functionalities
-        - Efficient neural networks implementation using flax.nnx modules
+Key Features:
+    - Built on top of base class getting all its functionalities
+    - Efficient neural networks implementation using flax.nnx modules
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 03/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 03/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
 import jax.numpy as jnp
+
 from ..base import Network
 
 

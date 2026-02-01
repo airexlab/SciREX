@@ -63,7 +63,7 @@ def generate_advection_data(n_samples=1200, nx=64, nt=100, v=1.0):
     L = 2 * jnp.pi
     dx = L / nx
     x = jnp.linspace(0, L, nx)
-    
+
     # Time domain
     T = 2.0
     dt = T / nt
@@ -86,7 +86,7 @@ def solve_advection(u0):
     """Solve using upwind scheme"""
     u = jnp.zeros((nt, nx))
     u = u.at[0].set(u0)
-    
+
     for n in range(1, nt):
         if v > 0:
             u = u.at[n].set(
@@ -102,7 +102,7 @@ def make_step(model, opt_state, batch):
     def loss_fn(model):
         pred = jax.vmap(model)(batch[0])
         return jnp.mean((pred - batch[1])**2)
-    
+
     loss, grads = eqx.filter_value_and_grad(loss_fn)(model)
     updates, opt_state = optimizer.update(grads, opt_state, model)
     model = eqx.apply_updates(model, updates)

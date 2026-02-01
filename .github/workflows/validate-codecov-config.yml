@@ -13,4 +13,3 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate codecov configuration
         run: curl -sSL --fail-with-body --data-binary @codecov.yaml https://codecov.io/validate
-

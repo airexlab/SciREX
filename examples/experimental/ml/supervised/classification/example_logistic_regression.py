@@ -40,7 +40,7 @@
         - pandas
         - matplotlib
         - scikit-learn
-        - scirex.eperimental.core.ml.supervised.classification.logistic_regression
+        - scirex.experimental.ml.supervised.classification.logistic_regression
 
     Authors:
         - Protyush P. Chowdhury (protyushc@iisc.ac.in)
@@ -52,7 +52,7 @@
 import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
-from scirex.eperimental.core.ml.supervised.classification.logistic_regression import (
+from scirex.experimental.ml.supervised.classification.logistic_regression import (
     LogisticRegressionClassifier,
 )
 

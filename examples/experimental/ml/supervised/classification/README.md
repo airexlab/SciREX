@@ -7,14 +7,14 @@ To use the classification module, you will need to import the specific classifie
 
 ```python
 
-from scirex.eperimental.core.ml.supervised.classification.logistic_regression import LogisticRegressionClassifier
+from scirex.experimental.ml.supervised.classification.logistic_regression import LogisticRegressionClassifier
 
 ```
 ## Load and Prepare Your Dataset
 
 If you use your custom dataset, you can preprocess the data using pandas
 
-```python 
+```python
 import pandas as pd
 from sklearn.model_selection import train_test_split
 

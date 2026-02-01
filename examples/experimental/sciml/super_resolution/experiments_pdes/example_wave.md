@@ -47,11 +47,11 @@ def generate_initial_conditions(key):
     positions = jax.random.uniform(k1, (max_pulses,)) * L
     widths = jax.random.uniform(k2, (max_pulses,)) * 0.2 + 0.1
     amplitudes = jax.random.uniform(k3, (max_pulses,)) * 0.8 + 0.2
-    
+
     # Initial velocity (smoothed random)
     v0 = jax.random.normal(k4, (nx,)) * 0.1
     v0 = jnp.convolve(v0, jnp.ones(10)/10, mode='same')
-    
+
     return u0, v0
 ```
 
@@ -63,10 +63,10 @@ def solve_wave_equation(init_conditions):
     u = jnp.zeros((nt, nx))
     u = u.at[0].set(u0)
     u = u.at[1].set(u0 + dt * v0)
-    
+
     for n in range(2, nt):
         u = u.at[n].set(
-            2 * u[n-1] - u[n-2] + 
+            2 * u[n-1] - u[n-2] +
             (c * dt/dx)**2 * (
                 jnp.roll(u[n-1], 1) - 2*u[n-1] + jnp.roll(u[n-1], -1)
             )
@@ -81,7 +81,7 @@ def make_step(model, opt_state, batch):
     def loss_fn(model):
         pred = jax.vmap(model)(batch[0])
         return jnp.mean((pred - batch[1])**2)
-    
+
     loss, grads = eqx.filter_value_and_grad(loss_fn)(model)
     updates, opt_state = optimizer.update(grads, opt_state, model)
     model = eqx.apply_updates(model, updates)

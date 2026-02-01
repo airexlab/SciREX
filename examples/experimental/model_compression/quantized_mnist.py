@@ -24,13 +24,13 @@
 
 """
    Example Script: quantized_mnist.py
-   
+
    This script demonstrates model quantization techniques on the MNIST dataset. Compares accuracy of different quantization approaches.
 
 
    This example includes:
        - Applying quantization-aware training (QAT)
-       - Implementing post-training quantization 
+       - Implementing post-training quantization
        - Comparing model sizes and accuracies
 
    Authors:
@@ -43,7 +43,7 @@
 
 import numpy as np
 import tensorflow as tf
-from scirex.eperimental.core.model_compression.quantization import QuantizationAwareTraining
+from scirex.experimental.model_compression.quantization import QuantizationAwareTraining
 
 # Load MNIST dataset
 (train_images, train_labels), (test_images, test_labels) = (

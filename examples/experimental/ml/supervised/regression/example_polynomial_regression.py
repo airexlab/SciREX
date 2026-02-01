@@ -39,10 +39,10 @@
         - Paranidharan (paranidharan@iisc.ac.in)
 
     Version Info:
-        - 01/Feb/2025: Initial version    
+        - 01/Feb/2025: Initial version
 """
 
-from scirex.eperimental.core.ml.supervised.regression.polynomial_regression import (
+from scirex.experimental.ml.supervised.regression.polynomial_regression import (
     PolynomialRegressionModel,
 )
 

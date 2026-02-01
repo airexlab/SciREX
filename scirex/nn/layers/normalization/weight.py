@@ -23,55 +23,54 @@
 # please contact: contact@scirex.org
 
 """
-    Module: normalization/weight.py
+Module: normalization/weight.py
 
-    Weight normalization techniques using Flax.NNX.
+Weight normalization techniques using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version
+Version Info:
+    - 01/02/2026: Initial version
 
 """
 
 from flax import nnx
-import jax.numpy as jnp
 
 
 class SpectralNorm(nnx.Module):
     """
     Spectral Normalization wrapper.
-    
+
     Normalizes weights by their spectral norm (largest singular value).
     Commonly used in GANs to stabilize training by constraining the Lipschitz constant.
-    
+
     Note: This is a simplified implementation. For production use, consider using
     dedicated spectral normalization libraries.
-    
+
     Args:
         layer: The layer to apply spectral normalization to
         n_power_iterations: Number of power iterations for estimating spectral norm (default: 1)
-        
+
     Example:
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> # Apply spectral norm to a linear layer
         >>> linear = nnx.Linear(in_features=64, out_features=32, rngs=rngs)
         >>> spec_linear = SpectralNorm(linear, n_power_iterations=1)
-        >>> 
+        >>>
         >>> import jax.numpy as jnp
         >>> x = jnp.ones((16, 64))
         >>> output = spec_linear(x)
     """
-    
+
     def __init__(self, layer: nnx.Module, n_power_iterations: int = 1):
         self.layer = layer
         self.n_power_iterations = n_power_iterations
         # Note: Full spectral norm implementation would require tracking singular vectors
         # This is a placeholder that wraps the layer
-    
+
     def __call__(self, *args, **kwargs):
         # Simplified: just call the wrapped layer
         # Full implementation would normalize weights before calling
@@ -81,34 +80,34 @@ class SpectralNorm(nnx.Module):
 class WeightNorm(nnx.Module):
     """
     Weight Normalization wrapper.
-    
+
     Reparameterizes weights as w = g * v / ||v||, where g is a learnable scalar
     and v is the weight vector. Improves conditioning and can speed up convergence.
-    
+
     Note: This is a simplified implementation. For production use, consider using
     dedicated weight normalization libraries.
-    
+
     Args:
         layer: The layer to apply weight normalization to
-        
+
     Example:
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> # Apply weight norm to a linear layer
         >>> linear = nnx.Linear(in_features=64, out_features=32, rngs=rngs)
         >>> wn_linear = WeightNorm(linear)
-        >>> 
+        >>>
         >>> import jax.numpy as jnp
         >>> x = jnp.ones((16, 64))
         >>> output = wn_linear(x)
     """
-    
+
     def __init__(self, layer: nnx.Module):
         self.layer = layer
         # Note: Full weight norm implementation would reparameterize the weights
         # This is a placeholder that wraps the layer
-    
+
     def __call__(self, *args, **kwargs):
         # Simplified: just call the wrapped layer
         # Full implementation would apply weight normalization before calling

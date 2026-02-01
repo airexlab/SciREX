@@ -23,20 +23,22 @@
 # please contact: contact@scirex.org
 
 """
-    Module: convolution.py
+Module: convolution.py
 
-    This module implements convolutional layers for Neural Networks using Flax.NNX.
+This module implements convolutional layers for Neural Networks using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 06/01/2025: Initial version
-        - 01/02/2026: Migrated from Equinox to Flax.NNX
+Version Info:
+    - 06/01/2025: Initial version
+    - 01/02/2026: Migrated from Equinox to Flax.NNX
 
 """
+
+from typing import Union
+
 from flax import nnx
-from typing import Union, Tuple
 
 
 class Conv(nnx.Conv):
@@ -66,18 +68,18 @@ class Conv3d(nnx.Conv):
         self,
         in_features: int,
         out_features: int,
-        kernel_size: Union[int, Tuple[int, int, int]],
-        strides: Union[int, Tuple[int, int, int]] = 1,
-        padding: str = 'SAME',
+        kernel_size: Union[int, tuple[int, int, int]],
+        strides: Union[int, tuple[int, int, int]] = 1,
+        padding: str = "SAME",
         use_bias: bool = True,
         rngs: nnx.Rngs = None,
-        **kwargs
+        **kwargs,
     ):
         if isinstance(kernel_size, int):
             kernel_size = (kernel_size, kernel_size, kernel_size)
         if isinstance(strides, int):
             strides = (strides, strides, strides)
-        
+
         super().__init__(
             in_features=in_features,
             out_features=out_features,
@@ -86,16 +88,17 @@ class Conv3d(nnx.Conv):
             padding=padding,
             use_bias=use_bias,
             rngs=rngs,
-            **kwargs
+            **kwargs,
         )
 
 
 # Transposed Convolution Layers (for upsampling)
 
+
 class ConvTranspose(nnx.ConvTranspose):
     """
     Transposed Convolution layer (Deconvolution) for upsampling.
-    
+
     Args:
         in_features: Number of input channels
         out_features: Number of output channels
@@ -105,28 +108,29 @@ class ConvTranspose(nnx.ConvTranspose):
         use_bias: Whether to use bias (default: True)
         rngs: Random number generators
     """
+
     pass
 
 
 class ConvTranspose1d(nnx.ConvTranspose):
     """1D Transposed Convolution for upsampling 1D sequences."""
-    
+
     def __init__(
         self,
         in_features: int,
         out_features: int,
-        kernel_size: Union[int, Tuple[int]],
-        strides: Union[int, Tuple[int]] = 1,
-        padding: str = 'SAME',
+        kernel_size: Union[int, tuple[int]],
+        strides: Union[int, tuple[int]] = 1,
+        padding: str = "SAME",
         use_bias: bool = True,
         rngs: nnx.Rngs = None,
-        **kwargs
+        **kwargs,
     ):
         if isinstance(kernel_size, int):
             kernel_size = (kernel_size,)
         if isinstance(strides, int):
             strides = (strides,)
-        
+
         super().__init__(
             in_features=in_features,
             out_features=out_features,
@@ -135,29 +139,29 @@ class ConvTranspose1d(nnx.ConvTranspose):
             padding=padding,
             use_bias=use_bias,
             rngs=rngs,
-            **kwargs
+            **kwargs,
         )
 
 
 class ConvTranspose2d(nnx.ConvTranspose):
     """2D Transposed Convolution for upsampling images."""
-    
+
     def __init__(
         self,
         in_features: int,
         out_features: int,
-        kernel_size: Union[int, Tuple[int, int]],
-        strides: Union[int, Tuple[int, int]] = 1,
-        padding: str = 'SAME',
+        kernel_size: Union[int, tuple[int, int]],
+        strides: Union[int, tuple[int, int]] = 1,
+        padding: str = "SAME",
         use_bias: bool = True,
         rngs: nnx.Rngs = None,
-        **kwargs
+        **kwargs,
     ):
         if isinstance(kernel_size, int):
             kernel_size = (kernel_size, kernel_size)
         if isinstance(strides, int):
             strides = (strides, strides)
-        
+
         super().__init__(
             in_features=in_features,
             out_features=out_features,
@@ -166,29 +170,29 @@ class ConvTranspose2d(nnx.ConvTranspose):
             padding=padding,
             use_bias=use_bias,
             rngs=rngs,
-            **kwargs
+            **kwargs,
         )
 
 
 class ConvTranspose3d(nnx.ConvTranspose):
     """3D Transposed Convolution for upsampling 3D data."""
-    
+
     def __init__(
         self,
         in_features: int,
         out_features: int,
-        kernel_size: Union[int, Tuple[int, int, int]],
-        strides: Union[int, Tuple[int, int, int]] = 1,
-        padding: str = 'SAME',
+        kernel_size: Union[int, tuple[int, int, int]],
+        strides: Union[int, tuple[int, int, int]] = 1,
+        padding: str = "SAME",
         use_bias: bool = True,
         rngs: nnx.Rngs = None,
-        **kwargs
+        **kwargs,
     ):
         if isinstance(kernel_size, int):
             kernel_size = (kernel_size, kernel_size, kernel_size)
         if isinstance(strides, int):
             strides = (strides, strides, strides)
-        
+
         super().__init__(
             in_features=in_features,
             out_features=out_features,
@@ -197,5 +201,5 @@ class ConvTranspose3d(nnx.ConvTranspose):
             padding=padding,
             use_bias=use_bias,
             rngs=rngs,
-            **kwargs
+            **kwargs,
         )

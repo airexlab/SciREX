@@ -23,29 +23,29 @@
 # please contact: contact@scirex.org
 
 """
-    Module: normalization/__init__.py
+Module: normalization/__init__.py
 
-    Exports for normalization layers.
+Exports for normalization layers.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version
+Version Info:
+    - 01/02/2026: Initial version
 
 """
 
 from scirex.nn.layers.normalization.batch import BatchNorm
-from scirex.nn.layers.normalization.layer import LayerNorm, RMSNorm
 from scirex.nn.layers.normalization.group import GroupNorm, InstanceNorm
+from scirex.nn.layers.normalization.layer import LayerNorm, RMSNorm
 from scirex.nn.layers.normalization.weight import SpectralNorm, WeightNorm
 
 __all__ = [
     "BatchNorm",
-    "LayerNorm",
-    "RMSNorm",
     "GroupNorm",
     "InstanceNorm",
+    "LayerNorm",
+    "RMSNorm",
     "SpectralNorm",
     "WeightNorm",
 ]

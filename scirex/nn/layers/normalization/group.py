@@ -23,15 +23,15 @@
 # please contact: contact@scirex.org
 
 """
-    Module: normalization/group.py
+Module: normalization/group.py
 
-    Group normalization and Instance normalization using Flax.NNX.
+Group normalization and Instance normalization using Flax.NNX.
 
-    Authors:
-        - Lokesh Mohanty (lokeshm@iisc.ac.in)
+Authors:
+    - Lokesh Mohanty (lokeshm@iisc.ac.in)
 
-    Version Info:
-        - 01/02/2026: Initial version
+Version Info:
+    - 01/02/2026: Initial version
 
 """
 
@@ -41,10 +41,10 @@ from flax import nnx
 class GroupNorm(nnx.GroupNorm):
     """
     Group Normalization.
-    
+
     Divides channels into groups and normalizes within each group.
     Effective for small batch sizes where BatchNorm struggles.
-    
+
     Args:
         num_groups: Number of groups to divide channels into
         num_features: Total number of features/channels (optional if can be inferred)
@@ -52,45 +52,46 @@ class GroupNorm(nnx.GroupNorm):
         use_bias: Whether to use bias parameter (default: True)
         use_scale: Whether to use scale parameter (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> import jax.numpy as jnp
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> # 32 channels divided into 8 groups
         >>> gn = GroupNorm(num_groups=8, rngs=rngs)
         >>> x = jnp.ones((4, 32, 32, 32))  # (batch, height, width, channels)
         >>> output = gn(x)
     """
+
     pass
 
 
 class InstanceNorm(nnx.Module):
     """
     Instance Normalization.
-    
+
     Normalizes each instance (sample) independently across spatial dimensions.
     Commonly used in style transfer and image generation tasks.
     Implemented as GroupNorm with num_groups = num_features.
-    
+
     Args:
         num_features: Number of features/channels to normalize
         epsilon: Small constant for numerical stability (default: 1e-5)
         use_bias: Whether to use bias parameter (default: True)
         use_scale: Whether to use scale parameter (default: True)
         rngs: Random number generators
-        
+
     Example:
         >>> import jax.numpy as jnp
         >>> from flax import nnx
-        >>> 
+        >>>
         >>> rngs = nnx.Rngs(0)
         >>> in_norm = InstanceNorm(num_features=32, rngs=rngs)
         >>> x = jnp.ones((4, 32, 32, 32))  # (batch, height, width, channels)
         >>> output = in_norm(x)
     """
-    
+
     def __init__(
         self,
         num_features: int,
@@ -107,6 +108,6 @@ class InstanceNorm(nnx.Module):
             use_scale=use_scale,
             rngs=rngs,
         )
-    
+
     def __call__(self, x):
         return self.group_norm(x)

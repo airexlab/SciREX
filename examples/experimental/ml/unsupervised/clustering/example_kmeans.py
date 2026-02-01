@@ -25,7 +25,7 @@
 """
 Example Script: example_kmeans.py
 
-This script demonstrates how to use the KMeans clustering class from SciREX 
+This script demonstrates how to use the KMeans clustering class from SciREX
 library to perform clustering on synthetic datasets. The example shows parameter
 selection, metrics calculation and visualization capabilities.
 
@@ -39,8 +39,8 @@ The example includes:
 Dependencies:
    - numpy
    - matplotlib
-   - scikit-learn 
-   - scirex.eperimental.core.ml.unsupervised.clustering.kmeans
+   - scikit-learn
+   - scirex.experimental.ml.unsupervised.clustering.kmeans
 
 Authors:
    - Debajyoti Sahoo (debajyotis@iisc.ac.in)
@@ -59,7 +59,7 @@ from sklearn.datasets import make_blobs, make_moons
 from sklearn.preprocessing import StandardScaler
 
 # Import SciREX model
-from scirex.eperimental.core.ml.unsupervised.clustering.kmeans import Kmeans
+from scirex.experimental.ml.unsupervised.clustering.kmeans import Kmeans
 
 
 def run_clustering(model, X, dataset_name: str):

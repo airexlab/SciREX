@@ -40,7 +40,7 @@ Note:
     The implementation is based on the FastVPINNs methodology [1] for efficient computation of Variational residuals of PDEs.
 
 References:
-    [1] FastVPINNs: Tensor-Driven Acceleration of VPINNs for Complex Geometries 
+    [1] FastVPINNs: Tensor-Driven Acceleration of VPINNs for Complex Geometries
     DOI: https://arxiv.org/abs/2404.12063
 """
 
