@@ -1,1 +1,0 @@
-::: scirex.core.dl.nn.layers.pooling
