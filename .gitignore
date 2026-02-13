@@ -34,7 +34,7 @@ examples/**/__pycache__/
 output/*
 
 
-# pytest 
+# pytest
 *.vtk
 *.msh
 sensor_points.png

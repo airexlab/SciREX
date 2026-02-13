@@ -36,8 +36,8 @@ SciREX is an open-source scientific AI and machine learning framework designed f
 ```sh
 mkdir scirex
 cd scirex
-git clone https://github.com/zenoxml/SciREX.git 
-``` 
+git clone https://github.com/zenoxml/SciREX.git
+```
 - Create a virtual environment
 ```sh
 python3 -m venv .
@@ -47,7 +47,7 @@ source bin/activate
 ```sh
 pip install -e .
 ```
-- This completes the installation. Check out the examples for usage 
+- This completes the installation. Check out the examples for usage
 ##  Documentation
 
 Visit our [documentation](https://scirex.org/docs)

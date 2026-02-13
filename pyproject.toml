@@ -1,13 +1,9 @@
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "scirex"
-version = "1.0.0"
-description = "Scientific Research and Engineering eXcellence Framework"
+version = "0.1.0"
+description = "SciREX: Scientific Research and Engineering eXcellence Framework is an open-source scientific AI and machine learning framework designed for researchers and engineers."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10, <4.0"
 license = { text = "Apache-2.0" }
 keywords = [
     "scientific-computing",
@@ -29,61 +25,135 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "numpy>=1.20.0",
-    "pandas>=1.3.0",
-    "scikit-learn>=1.0.0",
-    "matplotlib>=3.4.0",
-    "seaborn>=0.11.0",
-    "tqdm==4.66.3",
+    "flax>=0.10.6",
+    "grain>=0.2.13",
+    "jax[cuda]>=0.5.3",
+]
+
+[dependency-groups]
+# Development dependencies
+dev = [
+    "pytest>=9.0.2",
+    "pre-commit>=4.5.1",
+    "tox-uv>=1.29.0",
+    "deptry>=0.24.0",
+    "mypy>=1.19.1",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.10",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.1",
+    "mkdocstrings[python]>=1.0.0",
 ]
 
 [project.optional-dependencies]
-dl = [
-    "jax",
-    "jaxtyping",
-    "equinox",
-    "optax",
+exp-simple = [
+    "tiktoken>=0.12.0",
+    "matplotlib>=3.10.8",
+    "scikit-learn>=1.7.2",
+    "tqdm>=4.66.3",
 ]
-ml = [
-    "xgboost>=1.5.0",
+experimental = [
+    "pandas>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "matplotlib>=3.4.0",
+    "seaborn>=0.13.0",
+    "xgboost>=2.0.0",
     "ipykernel>=6.0.0",
     "jupyter>=1.0.0",
+    "tensorflow>=2.15.0",
+    "meshio>=5.3.0",
+    "pyDOE>=0.3.8",
+    "scipy>=1.11.0",
+    "gmsh>=4.11.0",
+    "pyyaml>=6.0.0",
+    "tensorflow-model-optimization>=0.8.0",
+    "torch>=2.0.0",
+    "torch_geometric>=2.3.0",
 ]
-fastvpinns = [
-    "tensorflow==2.13.0",
-    "meshio==5.3.4",
-    "pyDOE==0.3.8",
-    "scipy",
-    "gmsh",
-    "pyyaml",
+
+[tool.mypy]
+files = ["scirex"]
+exclude = "scirex/experimental"
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--ignore=tests/scirex/experimental"
+
+[tool.deptry]
+ignore_notebooks = true
+extend_exclude = [
+    "scirex/experimental",
+    "examples/"
 ]
-model_compression = [
-    "tensorflow-model-optimization"
+ignore = ["DEP002"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    "YTT", # flake8-2020
+    "S", # flake8-bandit
+    "B", # flake8-bugbear
+    "A", # flake8-builtins
+    "C4", # flake8-comprehensions
+    "T10", # flake8-debugger
+    "SIM", # flake8-simplify
+    "I", # isort
+    "C90", # mccabe
+    "E", "W", # pycodestyle
+    "F", # pyflakes
+    "PGH", # pygrep-hooks
+    "UP", # pyupgrade
+    "RUF", # ruff
+    "TRY", # tryceratops
 ]
-dev = [
-    "black==24.8.0",
-    "pytest",
-    "pytest-dependency",
-    "pytest-benchmark",
-    "pytest-cov",
-    "pytest-env",
-    "pytest-timeout",
-    "pytest-xdist",
+ignore = [
+    "E501", # LineTooLong
+    "E731", # DoNotAssignLambda
+    "S311", # Pseudo-random numbers
 ]
-examples_dl = [
-    "tensorflow",
-]
-examples_gnn = [
-    "torch",
-    "torch_geometric",
-]
-all = ["scirex[dl,ml,fastvpinns,dev,examples]"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["scirex"]
+
+[build-system]
+requires = ["uv_build>=0.9.26,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "scirex"
+module-root = ""
 
 [project.urls]
 Homepage = "https://scirex.org/"
@@ -91,35 +161,3 @@ Documentation = "https://scirex.org/doc/"
 Repository = "https://github.com/zenoxml/SciREX"
 "Bug Tracker" = "https://github.com/zenoxml/SciREX/issues"
 "Research Blog" = "https://scirex.org/blog"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["scirex*"]
-
-
-[tool.pytest.ini_options]
-minversion = "7.0"
-addopts = "-ra -q --cov=scirex"
-testpaths = [
-    "tests",
-]
-
-[tool.black]
-line-length = 88
-target-version = ['py310']
-include = '\.pyi?$'
-
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 88
-
-[tool.coverage.run]
-ignore_errors = true
-omit = [
-    "tests/*",
-    "setup.py",
-]
